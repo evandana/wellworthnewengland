@@ -1,0 +1,22 @@
+{
+  "name": "wwne-cloud-functions",
+  "version": "1.0.0",
+  "description": "Cloud FUnctions for Wellworth New England",
+  "main": "index.js",
+  "author": "Evan Dana and David Thomas",
+  "license": "Apache License Version 2.0",
+  "dependencies": {
+    "child-process-promise": "^2.2.0",
+    "cors": "^2.8.1",
+    "escape-html": "^1.0.3",
+    "express": "^4.15.3",
+    "firebase-admin": "^4.2.1",
+    "firebase-functions": "^0.5.9",
+    "node-schedule": "^1.1.0",
+    "nodemailer": "^2.7.2",
+    "promise": "^7.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
