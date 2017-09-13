@@ -27,7 +27,14 @@ import './index.css';
 
 /** Firebase Setup **/
 window._FIREBASE_ = firebase.initializeApp(config.firebase);
-firebase.auth().onAuthStateChanged(function(user) { store.dispatch(setCurrentUser(user)) });
+window._FIREBASE_PROVIDER_ = new firebase.auth.GoogleAuthProvider();
+firebase.auth().onAuthStateChanged(
+    (user) => {
+        if(user) {
+            store.dispatch(setCurrentUser(user));
+        }
+    }
+);
 
 /** Redux Setup **/
 const history = createHistory();

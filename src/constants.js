@@ -1,12 +1,13 @@
 /** USER ACTIONS **/
-export const ADD_USER = 'ADD_USER';
-export const CURRENT_USER = 'CURRENT_USER';
-export const LOGOUT_USER = 'LOGOUT_USER';
-export const LOGIN_USER = 'LOGIN_USER';
-export const PASSWORD_RESET = 'PASSWORD_RESET';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const LOGOUT_USER_REQUEST = 'LOGOUT_USER_REQUEST';
+
+/** AUTHENTICATION **/
+export const LOGIN_GOOGLE_REQUEST = 'LOGIN_GOOGLE_REQUEST';
 
 /** MODAL ACTIONS **/
 export const OPEN_MODAL = 'OPEN_MODAL';
+export const CLOSE_MODAL = 'CLOSE_MODAL';
 
 /** USER PERMISSION STATUSES **/
  export const ANONYMOUS = 'ANONYMOUS';

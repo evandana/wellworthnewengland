@@ -1,51 +1,33 @@
-import { 
-    ADD_USER,
-    CURRENT_USER,
-    LOGOUT_USER,
-    LOGIN_USER,
-    PASSWORD_RESET,
+import {
+    //AUTHENTICATION
+    LOGIN_GOOGLE_REQUEST,
+    LOGOUT_USER_REQUEST,
+    SET_CURRENT_USER,
     
     OPEN_MODAL,
 } from '../constants';
 
-export function addUser({ email, password }) {
-    return {
-        type: ADD_USER,
-        email,
-        password,
-    };
-}
-
-export function loginUser({ email, password }) {
-    return {
-        type: LOGIN_USER,
-        email,
-        password,
-    };
-}
-
-export function logoutUser() {
-    return {
-        type: LOGOUT_USER,
-    };
+/** AUTHENTICATION **/
+export function loginGoogleRequest() {
+    return { type: LOGIN_GOOGLE_REQUEST };
 }
 
 export function setCurrentUser(user) {
+    const { displayName, uid } = user;
     return {
-        type: CURRENT_USER,
-        user
-    };
+        displayName,
+        uid,
+        type: SET_CURRENT_USER,
+    }
 }
 
-export function resetPassword({email}) {
+export function logoutUserRequest() {
     return {
-        type: PASSWORD_RESET,
-        email
+        type: LOGOUT_USER_REQUEST,
     };
 }
 
 export function openModal() {
-    console.log('open modal called');
     return {
         type: OPEN_MODAL,
     }

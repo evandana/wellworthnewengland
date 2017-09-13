@@ -1,4 +1,5 @@
-import user from './user';
+import modal from './modal.js';
+import user from './user.js';
 
 function isLoggedIn(state = false, action) {
     return state;
@@ -6,6 +7,7 @@ function isLoggedIn(state = false, action) {
 
 const reducers = {
     isLoggedIn,
+    modal,
     user,
 };
 

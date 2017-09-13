@@ -13,8 +13,6 @@ import { Provider } from 'react-redux';
 import AuthorizedRoute from './components/controller/Common/Route';
 import Authorized from './components/view/Authorized';
 import Home from './components/controller/Home';
-import Login from './components/controller/Login';
-import PasswordReset from './components/controller/Login/PasswordReset';
 import Navigation from './components/controller/Common/Navigation';
 import AppModal from './components/controller/Common/Modal';
 import './App.css';
@@ -34,9 +32,7 @@ class App extends Component {
                             <Navigation />
                             <Switch>
                                 <Route exact path="/" component={Home} />
-                                <Route path="/login" component={Login} />
                                 <AuthorizedRoute path="/authorized" component={Authorized} />
-                                <Route path="/reset-password" component={PasswordReset} />
                             </Switch>
                             <AppModal />
                         </div>

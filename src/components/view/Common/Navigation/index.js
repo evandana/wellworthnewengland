@@ -14,8 +14,6 @@ const buildIconMenu = (role, actions) => {
 
     const { openModal } = actions;
     
-    console.log('role is', role);
-    
     if (role === ANONYMOUS) {
         return <FlatButton onTouchTap={openModal} label="Login" />;
     } else {

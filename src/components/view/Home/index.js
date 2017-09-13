@@ -3,8 +3,6 @@ import { ANONYMOUS } from '../../../constants';
 
 const Home = ({ userRole, loginUser, openModal }) => {
     
-    console.log('user role is', userRole);
-    
     let greeting = '';
     
     if (userRole === ANONYMOUS) {
