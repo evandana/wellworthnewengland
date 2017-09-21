@@ -1,5 +1,8 @@
 # Zellner Distributing Website
 
+## Run App
+
+Run any of the scripts in [./package.json]'s `scripts` block. Example: `npm start`
 
 ## UI Client
 
