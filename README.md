@@ -2,7 +2,8 @@
 
 ## Run App
 
-Run any of the scripts in [./package.json]'s `scripts` block. Example: `npm start`
+1. `npm install`
+1. Run any of the scripts in [./package.json]'s `scripts` block. Example: `npm start`
 
 ## UI Client
 
