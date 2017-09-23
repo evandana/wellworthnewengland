@@ -19,7 +19,7 @@
       "value": 80,
       "allExcept": ["comments", "regex"]
     },
-    "validateIndentation": 2,
+    "validateIndentation": 4,
     "validateQuoteMarks": "'",
 
     "disallowMultipleLineStrings": true,
