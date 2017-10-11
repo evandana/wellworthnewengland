@@ -8,25 +8,52 @@ class PendingUser extends Component {
 
     constructor(props) {
         super(props);
+        this.validationCheck = this.validationCheck.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+        this.inputValue = '';
         this.state = {
             validInput: false,
+            errorText: '',
+        }
+    }
+    
+    validationCheck(val) {
+        this.setState({validInput: !!val});
+        if (!!val) {
+            this.inputValue = val;
+        }
+    }
+    
+    onSubmit() {
+        const superSecretKey = "headytopper";
+        if (this.inputValue.toLowerCase() === superSecretKey) {
+            this.setState({
+                errorText: 'This Key is correct but I we\'re still under development',
+            });
+        } else {
+            this.setState({
+                errorText: 'Please enter a valid customer key',
+            });
         }
     }
     
     render() {
-        const { logoutUserRequest, userName } = this.props;
-        const { validInput } = this.state;
+        const { keyInputValidation, logoutUserRequest, userName } = this.props;
+        const { validInput, errorText } = this.state;
         
         const inputProps = {
+            errorText,
             hint: 'Enter Customer Key Here',
             id: 'customerKey',
             name: 'customerKey',
             label: 'Customer Key',
+            validationCheck: this.validationCheck,
         };
         
         const keyButtonProps = {
             disabled: !validInput,
             label: 'Submit Key',
+            onClick: this.onSubmit,
             primary: true,
         };
         
