@@ -4,6 +4,7 @@ import PendingUser from 'components/view/Common/Modal/PendingUser';
 
 const mapStateToProps = (state) => {
     const user = state.user;
+    
     return {
         userName: user.displayName,
     };
