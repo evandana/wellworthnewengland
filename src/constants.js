@@ -1,5 +1,9 @@
 /** USER ACTIONS **/
+export const GET_USER = 'GET_USER';
+export const UPDATE_USER = 'UPDATE_USER';
+
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const UPDATE_CURRENT_USER = 'UPDATE_CURRENT_USER';
 export const LOGOUT_USER_REQUEST = 'LOGOUT_USER_REQUEST';
 
 /** AUTHENTICATION **/
@@ -10,7 +14,7 @@ export const OPEN_MODAL = 'OPEN_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 
 /** USER PERMISSION STATUSES **/
- export const ANONYMOUS = 'ANONYMOUS';
- export const PENDING = 'PENDING';
- export const CUSTOMER = 'CUSTOMER';
- export const ADMIN = 'ADMIN';
+export const ANONYMOUS = 'ANONYMOUS';
+export const PENDING = 'PENDING';
+export const CUSTOMER = 'CUSTOMER';
+export const ADMIN = 'ADMIN';
