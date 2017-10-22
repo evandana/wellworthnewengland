@@ -9,12 +9,18 @@ import { Switch } from 'react-router';
 import { ConnectedRouter } from 'react-router-redux';
 /** REDUX **/
 import { Provider } from 'react-redux';
+/** FIREBASE **/
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
 /** APP **/
+import config from 'config';
 import AuthorizedRoute from './components/controller/Common/Route';
 import Authorized from './components/view/Authorized';
 import Home from './components/controller/Home';
 import Navigation from './components/controller/Common/Navigation';
 import AppModal from './components/controller/Common/Modal';
+import { getUser } from './actions';
 import './App.css';
 
 // Needed for onTouchTap
@@ -22,6 +28,27 @@ import './App.css';
 injectTapEventPlugin();
 
 class App extends Component {
+    
+    constructor(props) {
+        super(props);
+
+        /** Firebase Setup **/
+        window._FIREBASE_ = firebase.initializeApp(config.firebase);
+        window._FIREBASE_PROVIDER_ = new firebase.auth.GoogleAuthProvider();
+        window._FIREBASE_DB_ = firebase.database();
+        window._FIREBASE_.auth().onAuthStateChanged(
+            (user) => {
+                if(user && user.uid) {
+                    const userData = {
+                        uid: user.uid,
+                        displayName: user.displayName,
+                    };
+                    window._UI_STORE_.dispatch(getUser(user.uid, userData));
+                }
+            }
+        );
+    }
+    
     render() {
         const { store, history } = this.props;
         return (
