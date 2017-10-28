@@ -1,0 +1,24 @@
+.cart-item {
+    min-width: 5em;
+    max-width: 15em;
+}
+
+.cart-name {
+    min-width: 5em;
+    max-width: 15em;
+}
+
+.cart-options {
+    width: 16em;
+    max-width: 16em;
+}
+
+.cart-description {
+    min-width: 10em;
+    max-width: 25em;
+}
+
+.cart-cost {
+    min-width: 5em;
+    max-width: 15em;
+}
