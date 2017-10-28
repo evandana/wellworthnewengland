@@ -43,7 +43,6 @@ function* updateUser({userData}) {
     yield;
 }
 
-
 export default function* () {
     yield [
         takeEvery(GET_USER, getUser),
