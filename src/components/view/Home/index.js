@@ -1,7 +1,17 @@
 import React from 'react';
-import { ANONYMOUS } from '../../../constants';
+import { ANONYMOUS } from 'constants.js';
+import Cart from 'components/view/Common/Cart';
 
-const Home = ({ userRole, loginUser, openModal }) => {
+const Home = (props) => {
+    
+    const { userRole, openModal, products, toggleShowDescription, updateQuantity } = props;
+
+    const cartProps = {
+        products,
+        toggleShowDescription,
+        updateQuantity,
+        rowIndexExpanded: 0
+    };
     
     let greeting = '';
     
@@ -18,6 +28,7 @@ const Home = ({ userRole, loginUser, openModal }) => {
         <div className='page'>
             <h2>Welcome</h2>
            {greeting}
+           <Cart {...cartProps} />
         </div>
     );
     

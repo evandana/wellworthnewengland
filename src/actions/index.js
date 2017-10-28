@@ -10,6 +10,17 @@ import {
 
     // MODALS
     OPEN_MODAL,
+
+    // PRODUCTS,
+    GET_PRODUCTS,
+    UPDATE_PRODUCTS,
+
+    // ROW EXPANSION
+    TOGGLE_SHOW_DESCRIPTION,
+
+    // PRICE UPDATES
+    UPDATE_QUANTITY,
+
 } from '../constants';
 
 /** AUTHENTICATION **/
@@ -54,3 +65,38 @@ export function openModal() {
         type: OPEN_MODAL,
     };
 }
+
+
+/** PRODUCTS */
+export function getProducts(products) {
+    return {
+        type: GET_PRODUCTS,
+        products: products
+    };
+}
+export function updateProducts(products) {
+    console.log('updateProducts action', products);
+    return {
+        type: UPDATE_PRODUCTS,
+        products
+    };
+}
+
+/** ROW EXPANSION **/
+export function toggleShowDescription(row, col) {
+    return {
+        type: TOGGLE_SHOW_DESCRIPTION,
+        row, // 0 is first row
+        col, // 0 is first column
+    };
+} 
+
+/** PRICE UPDATES **/
+export function updateQuantity(productId, optionKey, quantity) {
+    return {
+        type: UPDATE_QUANTITY,
+        productId, 
+        optionKey, 
+        quantity,
+    };
+} 
