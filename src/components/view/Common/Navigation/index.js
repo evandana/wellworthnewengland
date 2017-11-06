@@ -8,7 +8,7 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import { ANONYMOUS } from '../../../../constants';
 import './styles.css';
 
-const buildIconMenu = (role, actions) => {
+const buildIconMenu = (role, actions) => {  
     const { logout } = actions;
     if (role !== ANONYMOUS) {
         return (<IconMenu
@@ -16,6 +16,14 @@ const buildIconMenu = (role, actions) => {
                 anchorOrigin={{horizontal: 'left', vertical: 'top'}}
                 targetOrigin={{horizontal: 'left', vertical: 'top'}}
             >
+                <MenuItem
+                    containerElement={<Link to="/" />}
+                    primaryText="Home"
+                />
+                <MenuItem
+                    containerElement={<Link to="/admin" />}
+                    primaryText="Admin"
+                />
                 <MenuItem onTouchTap={logout} primaryText="Logout" />
             </IconMenu>
         );

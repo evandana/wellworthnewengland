@@ -15,11 +15,12 @@ import 'firebase/auth';
 import 'firebase/database';
 /** APP **/
 import config from 'config';
-import AuthorizedRoute from './components/controller/Common/Route';
-import Authorized from './components/view/Authorized';
-import Home from './components/controller/Home';
-import Navigation from './components/controller/Common/Navigation';
-import AppModal from './components/controller/Common/Modal';
+import AuthorizedRoute from 'components/controller/Common/Route';
+import Admin from 'components/view/Admin';
+import Home from 'components/controller/Home';
+import Products from 'components/controller/Products';
+import Navigation from 'components/controller/Common/Navigation';
+import AppModal from 'components/controller/Common/Modal';
 import { getUser, getProducts } from './actions';
 import './App.css';
 
@@ -46,7 +47,10 @@ class App extends Component {
 
                     window._UI_STORE_.dispatch(getUser(user.uid, userData));
 
+                    // TODO: only load this on the products route
                     window._UI_STORE_.dispatch(getProducts());
+
+                    // TODO: only get admin view data from db based on Firebase auth
                 }
             }
         );
@@ -54,6 +58,7 @@ class App extends Component {
     
     render() {
         const { store, history } = this.props;
+
         return (
             <MuiThemeProvider>
                 <Provider store={store}>
@@ -61,8 +66,9 @@ class App extends Component {
                         <div className="app">
                             <Navigation />
                             <Switch>
-                                <Route exact path="/" component={Home} />
-                                <AuthorizedRoute path="/authorized" component={Authorized} />
+                                <Route exact path="/" component={Home}/>
+                                <Route exact path="/products" component={Products} />
+                                <AuthorizedRoute path="/admin" component={Admin} />
                             </Switch>
                             <AppModal />
                         </div>

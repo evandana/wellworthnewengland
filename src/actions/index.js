@@ -75,7 +75,6 @@ export function getProducts(products) {
     };
 }
 export function updateProducts(products) {
-    console.log('updateProducts action', products);
     return {
         type: UPDATE_PRODUCTS,
         products
