@@ -1,20 +1,26 @@
 import React from 'react'
-import {
-    Route,
-    Redirect,
-} from 'react-router-dom';
+import { ADMIN, SELLER } from 'constants.js';
+import { Route } from 'react-router-dom';
 
-const AuthorizedRoute = ({ isLoggedIn, component: Component, ...rest }) => (
-    <Route {...rest} render={props => (
-        isLoggedIn ? (
-                <Component {...props}/>
-            ) : (
-                <Redirect to={{
-                    pathname: '/login',
-                    state: { from: props.location }
-                }}/>
-            )
-    )}/>
-);
+import NotAuthorized from 'components/view/NotAuthorized';
+
+const AuthorizedRoute = (props) => {
+
+    const { location, userRole, component: Component, ...rest } = props;
+
+    const notAuthProps = {
+        from: location
+    };
+
+    return (
+        <Route {...rest} render={props => (
+            userRole === ADMIN || userRole === SELLER ? (
+                    <Component {...props}/>
+                ) : (
+                    <NotAuthorized {...notAuthProps} />
+                )
+        )}/>
+    );
+}
 
 export default AuthorizedRoute;
