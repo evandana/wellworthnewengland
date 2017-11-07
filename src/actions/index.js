@@ -29,10 +29,10 @@ export function loginGoogleRequest() {
 }
 
 export function setCurrentUser(user) {
-    const { displayName, role, uid } = user;
+    const { displayName, permissions, uid } = user;
     return {
         displayName,
-        role,
+        permissions,
         uid,
         type: SET_CURRENT_USER,
     };

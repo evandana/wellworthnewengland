@@ -1,12 +1,11 @@
 import React from 'react'
-import { ADMIN, SELLER } from 'constants.js';
 import { Route } from 'react-router-dom';
 
 import NotAuthorized from 'components/view/NotAuthorized';
 
 const AuthorizedRoute = (props) => {
 
-    const { location, userRole, component: Component, ...rest } = props;
+    const { location, userPermissions, component: Component, ...rest } = props;
 
     const notAuthProps = {
         from: location
@@ -14,7 +13,7 @@ const AuthorizedRoute = (props) => {
 
     return (
         <Route {...rest} render={props => (
-            userRole === ADMIN || userRole === SELLER ? (
+            userPermissions.admin || userPermissions.seller ? (
                     <Component {...props}/>
                 ) : (
                     <NotAuthorized {...notAuthProps} />

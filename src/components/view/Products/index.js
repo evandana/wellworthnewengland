@@ -1,10 +1,12 @@
 import React from 'react';
-import { ANONYMOUS } from 'constants.js';
+import { Redirect } from 'react-router-dom';
 import Cart from 'components/view/Common/Cart';
+import NotAuthorized from 'components/view/NotAuthorized';
+
 
 const Products = (props) => {
     
-    const { userRole, openModal, products, toggleShowDescription, updateQuantity } = props;
+    const { location, userPermissions, openModal, products, toggleShowDescription, updateQuantity } = props;
 
     const cartProps = {
         products,
@@ -13,22 +15,17 @@ const Products = (props) => {
         rowIndexExpanded: 0
     };
     
-    let greeting = '';
-    
-    if (userRole === ANONYMOUS) {
-        greeting = (
-            <div>
-                Welcome to the Well Worth New England site.  
-                Please <span className="fake-link" onClick={openModal}>Login</span> to register as a customer.
-            </div>
-        );
-    }
+    const notAuthProps = {
+        from: location
+    };
     
     return(
         <div className='page'>
             <h2>PRODUCTS</h2>
-           {greeting}
-           <Cart {...cartProps} />
+            { userPermissions.products ? 
+                <Cart {...cartProps} /> :
+                <NotAuthorized {...notAuthProps} /> 
+            }
         </div>
     );
     

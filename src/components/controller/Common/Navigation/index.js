@@ -6,7 +6,7 @@ const mapStateToProps = (state) => {
 
     return {
         user: state.user,
-        userRole: state.user.role,
+        userPermissions: state.user.permissions,
     };
 };
 
