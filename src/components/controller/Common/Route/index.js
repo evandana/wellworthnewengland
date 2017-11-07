@@ -3,7 +3,7 @@ import AuthorizedRoute from 'components/view/Common/Route';
 
 const mapStateToProps = (state) => {
     return {
-        userRole: state.user.role,
+        userPermissions: state.user.permissions,
     }
 };
 

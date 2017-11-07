@@ -6,7 +6,7 @@ const mapStateToProps = (state) => {
 
     return {
         products: state.products,
-        userRole: state.user.role,
+        userPermissions: state.user.permissions,
     };
 };
 

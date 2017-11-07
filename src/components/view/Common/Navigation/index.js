@@ -5,12 +5,11 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import { ANONYMOUS } from '../../../../constants';
 import './styles.css';
 
-const buildIconMenu = (role, actions) => {  
+const buildIconMenu = (permissions, actions) => {  
     const { logout } = actions;
-    if (role !== ANONYMOUS) {
+    if (permissions.basic) {
         return (<IconMenu
                 iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
                 anchorOrigin={{horizontal: 'left', vertical: 'top'}}
@@ -19,6 +18,10 @@ const buildIconMenu = (role, actions) => {
                 <MenuItem
                     containerElement={<Link to="/" />}
                     primaryText="Home"
+                />
+                <MenuItem
+                    containerElement={<Link to="/products" />}
+                    primaryText="Products"
                 />
                 <MenuItem
                     containerElement={<Link to="/admin" />}
@@ -31,9 +34,9 @@ const buildIconMenu = (role, actions) => {
 };
 
 const Navigation = (props) => {
-    const { userRole, logout, openModal } = props;
+    const { userPermissions, logout, openModal } = props;
     const titleLink = (<Link className="navigation__title-link" to="/">Well&#8226;Worth</Link>);
-    const iconMenu = buildIconMenu(userRole, { logout, openModal });
+    const iconMenu = buildIconMenu(userPermissions, { logout, openModal });
     return (
         <div>
             <AppBar
