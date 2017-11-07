@@ -16,7 +16,7 @@ function* loginGoogleRequest() {
 
 function* logoutUserRequest() {
     window._FIREBASE_.auth().signOut()
-        .then( () => {window.location.reload(true);} );
+        .then( () => {window.location = '/';} );
     
     yield;
 }
