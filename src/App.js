@@ -21,18 +21,17 @@ import Home from 'components/controller/Home';
 import Products from 'components/controller/Products';
 import Navigation from 'components/controller/Common/Navigation';
 import AppModal from 'components/controller/Common/Modal';
-import { getUser, getProducts } from './actions';
+import { getUser, getProducts, getOrders } from './actions';
+
+
 import './App.css';
-
-// Needed for onTouchTap
-// http://stackoverflow.com/a/34015469/988941
-injectTapEventPlugin();
-
 class App extends Component {
     
     constructor(props) {
         super(props);
-
+        
+        injectTapEventPlugin();
+        
         /** Firebase Setup **/
         window._FIREBASE_ = firebase.initializeApp(config.firebase);
         window._FIREBASE_PROVIDER_ = new firebase.auth.GoogleAuthProvider();
@@ -44,22 +43,25 @@ class App extends Component {
                         uid: user.uid,
                         displayName: user.displayName,
                         permissions: user.permissions,
+                        email: user.email,
                     };
-
+                    
                     window._UI_STORE_.dispatch(getUser(user.uid, userData));
-
+                    
                     // TODO: only load this on the products route
                     window._UI_STORE_.dispatch(getProducts());
-
-                    // TODO: only get admin view data from db based on Firebase auth
+                    
+                    // TODO: only load this on the admin route
+                    window._UI_STORE_.dispatch(getOrders());
                 }
             }
         );
     }
     
+
     render() {
         const { store, history } = this.props;
-
+        
         return (
             <MuiThemeProvider>
                 <Provider store={store}>
@@ -69,6 +71,7 @@ class App extends Component {
                             <Switch>
                                 <Route exact path="/" component={Home}/>
                                 <Route exact path="/products" component={Products} />
+                                <AuthorizedRoute exact path="/orders" component={Admin} />
                                 <AuthorizedRoute path="/admin" component={Admin} />
                             </Switch>
                             <AppModal />
