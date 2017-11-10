@@ -32,6 +32,7 @@ function* updateUser({userData}) {
             uid: userData.uid,
             displayName: userData.displayName,
             permissions: userData.permissions,
+            email: userData.email,
         };
     } else {
         cleanUser = {...currentUser, ...userData};

@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 
 const Home = (props) => {
     
-    const { userPermissions, openModal } = props;
+    const { userPermissions, openLoginModal } = props;
     
     let defaultView = '';
     
@@ -19,7 +19,7 @@ const Home = (props) => {
         defaultView = (
             <div>
                 Welcome to the Well Worth New England site.  
-                Please <span className="fake-link" onClick={openModal}>Login</span> to register as a customer.
+                Please <span className="fake-link" onClick={openLoginModal}>Login</span> to register as a customer.
             </div>
         );
     }
