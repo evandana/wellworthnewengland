@@ -2,6 +2,8 @@ import {
     TOGGLE_SHOW_DESCRIPTION,
     UPDATE_QUANTITY,
     UPDATE_PRODUCTS,
+    PLACE_ORDER,
+    CLEAR_PRODUCT_QUANTITIES,
 } from '../constants';
 
 const initialState = [
@@ -39,7 +41,7 @@ const initialState = [
 ];
 
 function products(state = initialState, action) {
-    const { type, row, productId, optionKey, quantity, products } = action;
+    const { type, row, productId, optionKey, quantity, products, orderMeta, response } = action;
 
     if (type === TOGGLE_SHOW_DESCRIPTION) {
 
@@ -54,7 +56,7 @@ function products(state = initialState, action) {
         state[state.findIndex(product => { return product.item === productId})].options
             .forEach(option => {
                 if (option.key === optionKey) {
-                    option.quantity = quantity;
+                    option.quantity = parseInt(quantity,10);
                 }
                 return option;
             });
@@ -66,6 +68,18 @@ function products(state = initialState, action) {
         return [
             ...products,
         ];
+    } else if (type === CLEAR_PRODUCT_QUANTITIES) {
+        return state.map(product => {
+            if (product.options) {
+                product.options = product.options.map( option => {
+                    option.quantity = 0;
+                    return option;
+                });
+                return product;
+            } else {
+                return product;
+            }
+        });
     } else {
         return state;
     }

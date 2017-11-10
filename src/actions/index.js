@@ -14,6 +14,15 @@ import {
     // PRODUCTS,
     GET_PRODUCTS,
     UPDATE_PRODUCTS,
+    PLACE_ORDER,
+    PLACE_ORDER_RESPONSE,
+    CLEAR_ORDER_RESPONSES,
+    CLEAR_PRODUCT_QUANTITIES,
+    
+    // ORDERS,
+    GET_ORDERS,
+    UPDATE_ORDERS,
+    TOGGLE_ORDER_DETAILS,
 
     // ROW EXPANSION
     TOGGLE_SHOW_DESCRIPTION,
@@ -29,8 +38,9 @@ export function loginGoogleRequest() {
 }
 
 export function setCurrentUser(user) {
-    const { displayName, permissions, uid } = user;
+    const { email, displayName, permissions, uid } = user;
     return {
+        email,
         displayName,
         permissions,
         uid,
@@ -60,7 +70,7 @@ export function updateUser(userData) {
     };
 }
 
-export function openModal() {
+export function openLoginModal() {
     return {
         type: OPEN_MODAL,
     };
@@ -71,7 +81,7 @@ export function openModal() {
 export function getProducts(products) {
     return {
         type: GET_PRODUCTS,
-        products: products
+        products
     };
 }
 export function updateProducts(products) {
@@ -80,6 +90,58 @@ export function updateProducts(products) {
         products
     };
 }
+
+export function placeOrder(products, orderMeta) {
+    return {
+        type: PLACE_ORDER,
+        products,
+        orderMeta,
+    };
+}
+
+export function placeOrderResponse(response) {
+    // let {status, code, response} = response;
+    return {
+        type: PLACE_ORDER_RESPONSE,
+        response,
+    }
+}
+
+export function clearOrderResponses(response) {
+    return {
+        type: CLEAR_ORDER_RESPONSES,
+    }
+}
+
+export function clearProductQuantities() {
+    return {
+        type: CLEAR_PRODUCT_QUANTITIES,
+    }
+}
+
+
+/** ORDERS */
+export function getOrders(orders) {
+    return {
+        type: GET_ORDERS,
+        orders
+    };
+}
+
+export function updateOrders(orders) {
+    return {
+        type: UPDATE_ORDERS,
+        orders
+    };
+}
+
+export function toggleOrderDetails(row) {
+    return {
+        type: TOGGLE_ORDER_DETAILS,
+        row,
+    }
+}
+
 
 /** ROW EXPANSION **/
 export function toggleShowDescription(row, col) {

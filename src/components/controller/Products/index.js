@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { openModal, toggleShowDescription, updateQuantity } from 'actions';
+import { toggleShowDescription, placeOrder, clearOrderResponses, clearProductQuantities, updateQuantity } from 'actions';
 import Products from 'components/view/Products';
 
 const mapStateToProps = (state) => {
@@ -7,10 +7,12 @@ const mapStateToProps = (state) => {
     return {
         products: state.products,
         userPermissions: state.user.permissions,
+        asyncResponses: state.asyncResponses,
+        user: state.user,
     };
 };
 
-const mapDispatchToProps = { openModal, toggleShowDescription, updateQuantity };
+const mapDispatchToProps = { toggleShowDescription, placeOrder, clearOrderResponses, clearProductQuantities, updateQuantity };
 
 const ProductsController = connect(
     mapStateToProps, mapDispatchToProps
