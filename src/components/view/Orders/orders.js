@@ -15,12 +15,26 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
+import FontIcon from 'material-ui/FontIcon';
+import IconButton from 'material-ui/IconButton';
+
+// TODO: why is this not loading the constants correctly?
+import { ORDERS_COL_STATE } from '../../../constants';
 
 import { OrderDetails } from 'components/view/Orders'
 
 const Orders = (props) => {
     
-    const { location, userPermissions, toggleOrderDetails, orders, orderDetails, requestUpdateOrder } = props;
+    const { 
+        location, 
+        userPermissions, 
+        toggleOrderDetails, 
+        orders,
+        orderDetails, 
+        requestUpdateOrder, 
+        requestSortOrderTable,
+        ordersSortObj,
+    } = props;
     
     const notAuthProps = {
         from: location
@@ -65,24 +79,74 @@ const Orders = (props) => {
         }
     }
 
-    const ordersArr = Object.keys(orders)
-
     function getOrderNumber (key) {
         return key.substr(1,6);
     }
 
+    const sortedOrders = ordersSortObj.col === '' || ordersSortObj.dir === 0 ? orders : orders.sort((a,b) => {
+        if (ordersSortObj.col === 'state') {
+            let diff = getStepIndexFromState(a[ordersSortObj.col]) - getStepIndexFromState(b[ordersSortObj.col]);
+            if (diff === 0) {
+                return 0;
+            } else {
+                diff = diff > 0 ? 1 : -1;
+            }
+            return ( ordersSortObj.dir === 2 ? -1 : 1 ) * diff;
+        }
+        if (ordersSortObj.col === 'timestamp') {
+            let diff = b.timestamp > a.timestamp ? 1 : -1;
+            return ( ordersSortObj.dir === 2 ? -1 : 1 ) * diff;
+        }
+    });
+
+    // styles for the icon based on sort obj
+    let sortIconStyles = {
+        state: {
+            root: {
+                marginLeft:'6px'
+            },
+            icon: {
+                color: '#aaa'
+            }
+        },
+        timestamp: {
+            root: {
+                marginLeft:'6px'
+            },
+            icon: {
+                color: '#aaa'
+            }
+        }
+    };
+
+    if (ordersSortObj.col && sortIconStyles[ordersSortObj.col]) {
+        
+        // root
+        const dirTransformStyle = ordersSortObj.dir === 2 ? {transform:'rotateZ(180deg)'} : {};
+        sortIconStyles[ordersSortObj.col].root = Object.assign( 
+            sortIconStyles[ordersSortObj.col].root,
+            dirTransformStyle,
+        );
+        
+        // icon
+        const dirColorActiveStyle = ordersSortObj.dir > 0 ? { color: '#f00' } : {};
+        sortIconStyles[ordersSortObj.col].icon = Object.assign( 
+            sortIconStyles[ordersSortObj.col].icon,
+            dirColorActiveStyle
+        );
+
+    }
+
     const orderView = (
         <div>
-            {ordersArr.length && ordersArr.map((key) => {
+            {sortedOrders.length && sortedOrders.map((order) => {
 
-                const order = orders[key];
-
-                order.number = getOrderNumber(key);
+                order.number = getOrderNumber(order.key);
 
                 if (order.detailsOpen) {
                     return <OrderDetails 
-                        key={key}
-                        orderKey={key}
+                        key={order.key}
+                        orderKey={order.key}
                         order={order}
                         toggleOrderDetails={toggleOrderDetails}
                         openDetailsModal={true}
@@ -101,17 +165,50 @@ const Orders = (props) => {
                 fixedHeader={false}
                 onCellClick={ (row, cell) => {
                     if (cell != 3) {
-                        let key = ordersArr[row];
+                        let key = sortedOrders[row].key;
                         toggleOrderDetails( key, true );
                     }
                 }}
                 >
                 <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false} >
                     <TableRow>
-                        <TableHeaderColumn className="order-number">Order #</TableHeaderColumn>
+                        {/* <TableHeaderColumn className="order-number">Order #</TableHeaderColumn> */}
+                        <TableHeaderColumn className="order-number">
+                            <div
+                                style={{float:'left', lineHeight:'48px'}}>
+                                Date 
+                            </div>
+                            <IconButton 
+                                iconClassName="material-icons"
+                                iconStyle={sortIconStyles.timestamp.icon}
+                                hoveredStyle={{background:'#eee'}}
+                                style={sortIconStyles.timestamp.root}
+                                onClick={() => {
+                                    requestSortOrderTable('timestamp');
+                                }}
+                                >
+                                sort
+                            </IconButton>
+                        </TableHeaderColumn>
                         <TableHeaderColumn className="order-customer">Customer</TableHeaderColumn>
                         <TableHeaderColumn className="order-total">Total</TableHeaderColumn>
-                        <TableHeaderColumn className="order-state">State</TableHeaderColumn>
+                        <TableHeaderColumn className="order-state">
+                            <div
+                                style={{float:'left', lineHeight:'48px'}}>
+                                State 
+                            </div>
+                            <IconButton 
+                                iconClassName="material-icons"
+                                iconStyle={sortIconStyles.state.icon}
+                                hoveredStyle={{background:'#eee'}}
+                                style={sortIconStyles.state.root}
+                                onClick={() => {
+                                    requestSortOrderTable('state');
+                                }}
+                                >
+                                sort
+                            </IconButton>
+                        </TableHeaderColumn>
                         <TableHeaderColumn className="order-items">Unique Items</TableHeaderColumn>
                     </TableRow>
                 </TableHeader>
@@ -120,13 +217,13 @@ const Orders = (props) => {
                     showRowHover={true}
                     deselectOnClickaway={true}
                     >
-                    {ordersArr.length && ordersArr.map((key) => {
+                    {sortedOrders.length && sortedOrders.map((order) => {
 
-                        const order = orders[key];
-                        const number = getOrderNumber(key);
+                        // const number = getOrderNumber(order.key);
                         
-                        return <TableRow key={key}>
-                            <TableRowColumn className="order-number" >{number}</TableRowColumn>
+                        return <TableRow key={order.key}>
+                            {/* <TableRowColumn className="order-number" >{number}</TableRowColumn> */}
+                            <TableRowColumn className="order-timestamp" >{order.timestamp}</TableRowColumn>
                             <TableRowColumn className="order-customer" >
                                 {order.customerInfo.name}
                             </TableRowColumn>
@@ -134,10 +231,11 @@ const Orders = (props) => {
                             <TableRowColumn className="order-state" >
                                 <SelectField
                                     floatingLabelText=""
+                                    style={{width:'160px'}}
                                     value={getStepIndexFromState(order.state)}
                                     onChange={(evt, index) => {
                                         order.state = getStateObjByControlIndex(index);
-                                        requestUpdateOrder(key, order)
+                                        requestUpdateOrder(order.key, order)
                                     }}
                                     >
                                     {orderStatesText.map( (orderStateText, index) => {
