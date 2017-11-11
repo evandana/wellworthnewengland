@@ -13,7 +13,19 @@ import { updateOrders as updateOrdersAction, placeOrderResponse as placeOrderRes
 function* getOrders() {
     window._FIREBASE_DB_.ref('/orders/')
         .on('value', (snapshot) => {
-            const orders = snapshot.val();
+            
+            // convert obj to array
+            const ordersObj = snapshot.val();
+            const orderKeys = Object.keys(ordersObj);
+            let orders = orderKeys.map( orderKey => {
+                ordersObj[orderKey].key = orderKey;
+                return ordersObj[orderKey];
+            });
+
+            orders.sort( (a,b) => {
+                return b.timestamp > a.timestamp ? 1 : -1;
+            });
+
             window._UI_STORE_.dispatch(updateOrdersAction(orders));
         });
     yield;
@@ -40,11 +52,13 @@ function* requestUpdateOrder(orderData) {
 function* placeOrder(orderData) {
     let {orderMeta, products} = orderData;
 
+    const timeNow = new Date();
+
     window._FIREBASE_DB_.ref('/orders/')
         .push(Object.assign({}, 
             orderMeta,
             { 
-                timestamp: new Date(),
+                timestamp: timeNow.toTimeString(),
                 customerInfo: orderMeta.customerInfo,
                 state: {
                     placed: true,

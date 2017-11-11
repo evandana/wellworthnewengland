@@ -62,13 +62,16 @@ function orders(state = initialState, action) {
 
     if (type === UPDATE_ORDERS) {
         
-        return Object.assign({}, orders);
+        return [...orders];
 
     } else if (type === TOGGLE_ORDER_DETAILS) {
 
-        state[row].detailsOpen = !state[row].detailsOpen;
-        
-        return Object.assign({},state);
+        return state.map(order => {
+            if (order.key === row) {
+                order.detailsOpen = !order.detailsOpen;
+            }
+            return order
+        });
     } else {
         return state;
     }
