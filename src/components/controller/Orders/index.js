@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { toggleOrderDetails, placeOrder, requestUpdateOrder, requestSortOrderTable } from 'actions';
+import { toggleOrderDetails, placeOrder, requestUpdateOrder, requestSortOrderTable, requestFilterOrderTable } from 'actions';
 import { Orders } from 'components/view/Orders';
 
 const mapStateToProps = (state) => {
@@ -8,10 +8,12 @@ const mapStateToProps = (state) => {
         orders: state.orders,
         userPermissions: state.user.permissions,
         ordersSortObj: state.ordersSortObj,
+        ordersFilterObj: state.ordersFilterObj,
+        users: state.users,
     };
 };
 
-const mapDispatchToProps = { toggleOrderDetails, placeOrder, requestUpdateOrder, requestSortOrderTable };
+const mapDispatchToProps = { toggleOrderDetails, placeOrder, requestUpdateOrder, requestSortOrderTable, requestFilterOrderTable };
 
 const OrdersController = connect(
     mapStateToProps, mapDispatchToProps
