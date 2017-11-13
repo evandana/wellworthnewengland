@@ -2,6 +2,16 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import NotAuthorized from 'components/view/NotAuthorized';
 import {
+    LABEL_PLACED,
+    LABEL_CONFIRMED,
+    LABEL_OUT_FOR_DELIVERY,
+    LABEL_FULFILLED,
+    
+    COL_CUSTOMER,
+    COL_DATE,
+    COL_STATUS,
+} from 'constants.js';
+import {
     Table,
     TableBody,
     TableHeader,
@@ -18,8 +28,6 @@ import Dialog from 'material-ui/Dialog';
 import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
 
-// TODO: why is this not loading the constants correctly?
-import { ORDERS_COL_STATE } from '../../../constants';
 import { TimeFormatter } from 'components/view/Common/Helpers';
 import { OrderDetails } from 'components/view/Orders';
 
@@ -48,20 +56,19 @@ const Orders = (props) => {
         'outForDelivery',
         'fulfilled',
     ];
-
-    // TODO: move to constants
+    
     const orderStatesText = [
-        'Placed',
-        'Confirmed',
-        'Out for Delivery',
-        'Fulfilled'
+        LABEL_PLACED,
+        LABEL_CONFIRMED,
+        LABEL_OUT_FOR_DELIVERY,
+        LABEL_FULFILLED,
     ];
 
     function getStateObjByControlIndex (controlIndex) {
         let state = {};
         orderStatesProps.forEach((stateProp, propIndex) => {
             state[stateProp] = propIndex <= controlIndex;
-        }) 
+        }) ;
         return state;
     }
 
@@ -92,16 +99,16 @@ const Orders = (props) => {
 
     // filter orders
     let sortedFilteredOrders = ordersFilterObj.col === '' || ordersFilterObj.vals.length === 0 ? orders : orders.filter(order => {
-        if (ordersFilterObj.col === 'state') {
+        if (ordersFilterObj.col === COL_STATUS) {
             return ordersFilterObj.vals.includes( getStepIndexFromState(order.state) );
-        } else if (ordersFilterObj.col === 'customer') {
+        } else if (ordersFilterObj.col === COL_CUSTOMER) {
             return ordersFilterObj.vals.includes( order.customerInfo.name );
         }
     });
     
     // sort orders
     sortedFilteredOrders = ordersSortObj.col === '' || ordersSortObj.dir === 0 ? orders : sortedFilteredOrders.sort((a,b) => {
-        if (ordersSortObj.col === 'state') {
+        if (ordersSortObj.col === COL_STATUS) {
             let diff = getStepIndexFromState(a[ordersSortObj.col]) - getStepIndexFromState(b[ordersSortObj.col]);
             if (diff === 0) {
                 return 0;
@@ -110,11 +117,11 @@ const Orders = (props) => {
             }
             return ( ordersSortObj.dir === 2 ? -1 : 1 ) * diff;
         }
-        if (ordersSortObj.col === 'timestamp') {
+        if (ordersSortObj.col === COL_DATE) {
             let diff = b.timestamp > a.timestamp ? 1 : -1;
             return ( ordersSortObj.dir === 2 ? -1 : 1 ) * diff;
         }
-        if (ordersSortObj.col === 'customer') {
+        if (ordersSortObj.col === COL_CUSTOMER) {
             let diff = b.customerInfo.name > a.customerInfo.name ? -1 : 1;
             return ( ordersSortObj.dir === 2 ? -1 : 1 ) * diff;
         }
@@ -122,15 +129,15 @@ const Orders = (props) => {
 
     // styles for the icon based on sort obj
     let sortIconStyles = {
-        state: {
+        [COL_STATUS]: {
             root: { marginLeft:'6px' },
             icon: { color: '#ccc' }
         },
-        timestamp: {
+        [COL_DATE]: {
             root: { marginLeft:'6px' },
             icon: { color: '#ccc' }
         },
-        customer: {
+        [COL_CUSTOMER]: {
             root: { marginLeft:'6px' },
             icon: { color: '#ccc' }
         }
@@ -152,11 +159,11 @@ const Orders = (props) => {
     }
     
     let filterIconStyles = {
-        state: {
+        [COL_STATUS]: {
             root: {},
             icon: { color: '#ccc' },
         },
-        customer: {
+        [COL_CUSTOMER]: {
             root: {},
             icon: { color: '#ccc' },
         },
@@ -170,7 +177,6 @@ const Orders = (props) => {
             dirColorActiveStyle
         );
     }
-
 
     let selectionRenderer = (values) => {
         switch (values.length) {
@@ -220,19 +226,18 @@ const Orders = (props) => {
                 >
                 <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false} >
                     <TableRow>
-                        {/* <TableHeaderColumn className="order-number">Order #</TableHeaderColumn> */}
-                        <TableHeaderColumn className="order-number">
+                        <TableHeaderColumn className="order-date">
                             <div
                                 style={{float:'left', lineHeight:'48px'}}>
                                 Date 
                             </div>
                             <IconButton 
                                 iconClassName="material-icons"
-                                iconStyle={sortIconStyles.timestamp.icon}
+                                iconStyle={sortIconStyles[COL_DATE].icon}
                                 hoveredStyle={{background:'#eee'}}
-                                style={sortIconStyles.timestamp.root}
+                                style={sortIconStyles[COL_DATE].root}
                                 onClick={() => {
-                                    requestSortOrderTable('timestamp');
+                                    requestSortOrderTable(COL_DATE);
                                 }}
                                 >
                                 sort
@@ -245,22 +250,22 @@ const Orders = (props) => {
                             </div>
                             <IconButton 
                                 iconClassName="material-icons"
-                                iconStyle={sortIconStyles.customer.icon}
+                                iconStyle={sortIconStyles[COL_CUSTOMER].icon}
                                 hoveredStyle={{background:'#eee'}}
-                                style={sortIconStyles.customer.root}
+                                style={sortIconStyles[COL_CUSTOMER].root}
                                 onClick={() => {
-                                    requestSortOrderTable('customer');
+                                    requestSortOrderTable(COL_CUSTOMER);
                                 }}
                                 >
                                 sort
                             </IconButton>
                             <IconButton 
                                 iconClassName="material-icons"
-                                iconStyle={filterIconStyles.customer.icon}
+                                iconStyle={filterIconStyles[COL_CUSTOMER].icon}
                                 hoveredStyle={{background:'#eee'}}
-                                style={filterIconStyles.customer.root}
+                                style={filterIconStyles[COL_CUSTOMER].root}
                                 onClick={() => {
-                                    let col = ordersFilterObj.col === 'customer' ? '' : 'customer';
+                                    let col = ordersFilterObj.col === COL_CUSTOMER ? '' : COL_CUSTOMER;
                                     requestFilterOrderTable(col, []);
                                 }}
                                 >
@@ -275,22 +280,22 @@ const Orders = (props) => {
                             </div>
                             <IconButton 
                                 iconClassName="material-icons"
-                                iconStyle={sortIconStyles.state.icon}
+                                iconStyle={sortIconStyles[COL_STATUS].icon}
                                 hoveredStyle={{background:'#eee'}}
-                                style={sortIconStyles.state.root}
+                                style={sortIconStyles[COL_STATUS].root}
                                 onClick={() => {
-                                    requestSortOrderTable('state');
+                                    requestSortOrderTable(COL_STATUS);
                                 }}
                                 >
                                 sort
                             </IconButton>
                             <IconButton 
                                 iconClassName="material-icons"
-                                iconStyle={filterIconStyles.state.icon}
+                                iconStyle={filterIconStyles[COL_STATUS].icon}
                                 hoveredStyle={{background:'#eee'}}
-                                style={filterIconStyles.state.root}
+                                style={filterIconStyles[COL_STATUS].root}
                                 onClick={() => {
-                                    let col = ordersFilterObj.col === 'state' ? '' : 'state';
+                                    let col = ordersFilterObj.col === COL_STATUS ? '' : COL_STATUS;
                                     requestFilterOrderTable(col, []);
                                 }}
                                 >
@@ -302,14 +307,14 @@ const Orders = (props) => {
                         style={showFilterRow}>
                         <TableHeaderColumn className="order-number"></TableHeaderColumn>
                         <TableHeaderColumn className="order-customer">
-                            {ordersFilterObj.col !== 'customer' ? '' : (
+                            {ordersFilterObj.col !== COL_CUSTOMER ? '' : (
                             <SelectField
                                 multiple={true}
                                 hintText='Filter by...'
                                 style={{width:'160px'}}
                                 value={ordersFilterObj.vals}
                                 onChange={(evt, index, vals) => {
-                                    requestFilterOrderTable('customer', vals)
+                                    requestFilterOrderTable(COL_CUSTOMER, vals)
                                 }}
                                 >
                                 {users.map( (user, index) => {
@@ -319,14 +324,14 @@ const Orders = (props) => {
                         </TableHeaderColumn>
                         <TableHeaderColumn className="order-total"></TableHeaderColumn>
                         <TableHeaderColumn className="order-state">
-                            {ordersFilterObj.col !== 'state' ? '' : (
+                            {ordersFilterObj.col !== COL_STATUS ? '' : (
                             <SelectField
                                 multiple={true}
                                 hintText='Filter by...'
                                 style={{width:'160px'}}
                                 value={ordersFilterObj.vals}
                                 onChange={(evt, index, vals) => {
-                                    requestFilterOrderTable('state', vals)
+                                    requestFilterOrderTable(COL_STATUS, vals)
                                 }}
                                 >
                                 {orderStatesText.map( (orderStateText, index) => {
