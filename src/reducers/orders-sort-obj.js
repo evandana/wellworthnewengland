@@ -1,9 +1,10 @@
 import {
+    COL_DATE,
     REQUEST_SORT_ORDER_TABLE,
 } from '../constants';
 
 const initialState = {
-    col: 'timestamp',
+    col: COL_DATE,
     dir: 1,
 };
 
@@ -23,7 +24,7 @@ function ordersSortObj(state = initialState, action) {
 
         if (state.col === '' || state.dir === 0) {
             state = {
-                col: 'timestamp',
+                col: COL_DATE,
                 dir: 1,
             }
         }

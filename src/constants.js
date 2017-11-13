@@ -26,7 +26,6 @@ export const TOGGLE_ORDER_DETAILS = 'TOGGLE_ORDER_DETAILS';
 export const REQUEST_UPDATE_ORDER = 'REQUEST_UPDATE_ORDER';
 export const REQUEST_SORT_ORDER_TABLE = 'REQUEST_SORT_ORDER_TABLE';
 export const REQUEST_FILTER_ORDER_TABLE = 'REQUEST_FILTER_ORDER_TABLE';
-export const ORDERS_COL_STATE = 'ORDERS_COL_STATE';
 
 /* ASYNC */
 export const RESPONSE_CODE_SUCCESS = 200;
@@ -40,3 +39,14 @@ export const TOGGLE_SHOW_DESCRIPTION = 'TOGGLE_SHOW_DESCRIPTION';
 
 /** PRICE UPDATES **/
 export const UPDATE_QUANTITY = 'UPDATE_QUANTITY';
+
+/** ORDER STATES **/
+export const LABEL_PLACED = 'Placed';
+export const LABEL_CONFIRMED = 'Confirmed';
+export const LABEL_OUT_FOR_DELIVERY = 'Out for Delivery';
+export const LABEL_FULFILLED = 'Fulfilled';
+
+/** COLUMN NAMES **/
+export const COL_DATE = 'timestamp';
+export const COL_CUSTOMER = 'customer';
+export const COL_STATUS = 'state';
