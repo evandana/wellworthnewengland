@@ -15,9 +15,7 @@ function* loginGoogleRequest() {
 }
 
 function* logoutUserRequest() {
-    window._FIREBASE_.auth().signOut()
-        .then( () => {window.location = '/';} );
-    
+    window._FIREBASE_.auth().signOut();
     yield;
 }
 

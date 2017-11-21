@@ -6,6 +6,7 @@ const defaultUser = {
     permissions: {},
     name: '',
     uid: '',
+    authInitiated: false,
 };
 
 function user(state = defaultUser, action) {

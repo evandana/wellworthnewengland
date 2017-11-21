@@ -5,16 +5,17 @@ import PendingUserController from 'components/controller/Common/Modal/PendingUse
 
 const mapStateToProps = (state) => {
     let { open, activeModal, title, ModalComponent } = state.modal;
-
-    if (!state.user.permissions.basic) {
+    const { authInitiated, permissions } = state.user;
+    
+    if (!permissions.basic && authInitiated) {
         open = true;
         title = 'LOGIN';
         ModalComponent = LoginController;
-    } else if (!state.user.permissions.products) {
+    } else if (!permissions.products && authInitiated) {
         open = true;
         title = 'PENDING CUSTOMER';
         ModalComponent = PendingUserController;
-    } else if (state.user.permissions.products) {
+    } else {
         open = false;
     }
     
