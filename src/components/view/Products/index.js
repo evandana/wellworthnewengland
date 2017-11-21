@@ -27,10 +27,7 @@ const Products = (props) => {
     return(
         <div className='page'>
             <h2>PRODUCTS</h2>
-            { userPermissions.products ? 
-                <Cart {...cartProps} /> :
-                <NotAuthorized {...notAuthProps} /> 
-            }
+            { userPermissions.products && <Cart {...cartProps} />}
         </div>
     );
     
