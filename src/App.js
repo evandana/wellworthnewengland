@@ -21,7 +21,7 @@ import Home from 'components/controller/Home';
 import Products from 'components/controller/Products';
 import Navigation from 'components/controller/Common/Navigation';
 import AppModal from 'components/controller/Common/Modal';
-import { getUser, getProducts, getOrders } from './actions';
+import { getUser, getProducts, getOrders, setCurrentUser } from './actions';
 
 
 import './App.css';
@@ -53,6 +53,8 @@ class App extends Component {
                     
                     // TODO: only load this on the admin route
                     window._UI_STORE_.dispatch(getOrders());
+                } else {
+                    window._UI_STORE_.dispatch(setCurrentUser({authInitiated: true}));
                 }
             }
         );
@@ -70,7 +72,7 @@ class App extends Component {
                             <Navigation />
                             <Switch>
                                 <Route exact path="/" component={Home}/>
-                                <Route exact path="/products" component={Products} />
+                                <AuthorizedRoute exact path="/products" component={Products} />
                                 <AuthorizedRoute exact path="/orders" component={Admin} />
                                 <AuthorizedRoute path="/admin" component={Admin} />
                             </Switch>
