@@ -36,7 +36,7 @@ exports.ordercreated = functions.database.ref('/orders/{orderId}')
     console.log('email disabled for now');
 
     // TODO: enable once ready
-    // sendEmail([emailRecipients, newOrder.customerInfo.email], createEmailHtml(newOrder));
+    sendEmail([emailRecipients, newOrder.customerInfo.email], createEmailHtml(newOrder));
 
     return;
   }
@@ -45,9 +45,9 @@ exports.ordercreated = functions.database.ref('/orders/{orderId}')
 function createEmailHtml(order) {
   var emailStr = '';
   emailStr += 'ORDER FROM ZELLNER DISTRIBUTING WEBSITE' + '<br/><br/>';
-  emailStr += 'FROM: ' + order.customerInfo.name + ' ('+order.customerInfo.name+')' + '<br/><br/>';
+  emailStr += 'FROM: ' + order.customerInfo.name + ' ('+order.customerInfo.email+')' + '<br/><br/>';
   emailStr += 'TIME: ' + new Date(order.timestamp) + ')' + '<br/><br/>';
-  emailStr += 'TOTAL: $' + order.total/100 + '<br/>';
+  // emailStr += 'TOTAL: $' + order.total/100 + '<br/>';
   emailStr += 'ITEMS: ' + '<br/>';
 
   order.items.forEach(item => {
