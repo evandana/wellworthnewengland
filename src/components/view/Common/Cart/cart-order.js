@@ -11,6 +11,8 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
+
+import { TimeFormatter } from 'components/view/Common/Helpers';
 import './styles.css';
 
 class CartOrder extends Component {
@@ -113,14 +115,27 @@ class CartOrder extends Component {
                     <Table selectable={false} multiSelectable={false} style={{tableLayout: 'auto' }} fixedHeader={false}>
                         <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false} >
                             <TableRow>
-                                <TableHeaderColumn className="cart-item" style={{textAlign: 'center'}}>Date</TableHeaderColumn>
-                                <TableHeaderColumn className="cart-name" style={{textAlign: 'center'}}>Size</TableHeaderColumn>
-                                <TableHeaderColumn className="cart-name" style={{textAlign: 'center'}}>Email</TableHeaderColumn>
+                                <TableHeaderColumn colSpan={2} className="cart-item" style={{textAlign: 'center'}}>
+                                    Order will be placed: <TimeFormatter
+                                        time={new Date().getTime()}
+                                        />
+                                </TableHeaderColumn>
+                                <TableHeaderColumn className="cart-name" style={{textAlign: 'center'}}>Email: {user.email}</TableHeaderColumn>
                             </TableRow>
-                            <TableRow>
-                                <TableHeaderColumn className="cart-name" colSpan={3} style={{textAlign: 'center'}}>Text input for notes</TableHeaderColumn>
+                            {/* <TableRow>
+                                <TableHeaderColumn className="cart-name" colSpan={3} style={{textAlign: 'center'}}> */}
+                                {/* Adding a notes box will take a good amount of work */}
+                                    {/* <TextField
+                                        hintText="Add notes here"
+                                        floatingLabelText="Notes"
+                                        value={user.orderNotes}
+
+                                        multiLine={true}
+                                        rows={2}
+                                        />
+                                </TableHeaderColumn> */}
                                 {/* <TableHeaderColumn className="cart-item" style={{textAlign: 'center'}}>Total: ${total/100}</TableHeaderColumn> */}
-                            </TableRow>
+                            {/* </TableRow> */}
                             <TableRow>
                                 <TableHeaderColumn className="cart-item" >Item</TableHeaderColumn>
                                 <TableHeaderColumn className="cart-name" >Size</TableHeaderColumn>
