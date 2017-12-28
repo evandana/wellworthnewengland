@@ -272,7 +272,7 @@ const Orders = (props) => {
                                 filter_list
                             </IconButton>
                         </TableHeaderColumn>
-                        <TableHeaderColumn className="order-total">Total</TableHeaderColumn>
+                        {/* <TableHeaderColumn className="order-total">Total</TableHeaderColumn> */}
                         <TableHeaderColumn className="order-state">
                             <div
                                 style={{float:'left', lineHeight:'48px'}}>
@@ -322,7 +322,7 @@ const Orders = (props) => {
                                 })}
                             </SelectField> )}
                         </TableHeaderColumn>
-                        <TableHeaderColumn className="order-total"></TableHeaderColumn>
+                        {/* <TableHeaderColumn className="order-total"></TableHeaderColumn> */}
                         <TableHeaderColumn className="order-state">
                             {ordersFilterObj.col !== COL_STATUS ? '' : (
                             <SelectField
@@ -360,7 +360,7 @@ const Orders = (props) => {
                             <TableRowColumn className="order-customer" >
                                 {order.customerInfo.name}
                             </TableRowColumn>
-                            <TableRowColumn className="order-total" >${order.total/100}</TableRowColumn>
+                            {/* <TableRowColumn className="order-total" >${order.total/100}</TableRowColumn> */}
                             <TableRowColumn className="order-state" >
                                 <SelectField
                                     floatingLabelText=""
