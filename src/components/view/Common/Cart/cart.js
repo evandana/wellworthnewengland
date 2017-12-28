@@ -133,8 +133,8 @@ class Cart extends Component {
                     <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false} >
                         <TableRow style={{borderColor: '#ccc'}}>
                             <TableHeaderColumn className="cart-name" style={{textAlign: 'center'}}></TableHeaderColumn>
-                            <TableHeaderColumn className="cart-name" style={{textAlign: 'center'}}></TableHeaderColumn>
-                            <TableHeaderColumn className="cart-item" style={{textAlign: 'center'}}>Total: ${totalCost/100}</TableHeaderColumn>
+                            <TableHeaderColumn className="cart-name" colSpan={2} style={{textAlign: 'center'}}></TableHeaderColumn>
+                            {/* <TableHeaderColumn className="cart-item" style={{textAlign: 'center'}}>Total: ${totalCost/100}</TableHeaderColumn> */}
                             <TableHeaderColumn className="cart-name" style={{textAlign: 'center'}}>
                                 <RaisedButton label="Place Order" primary={true} disabled={!enableOrderButton} onClick={() => { this.setState({openOrderModal: true}) } } />
                             </TableHeaderColumn>
@@ -194,7 +194,7 @@ class Cart extends Component {
                                     return <TableRow key={product.item + '__option_' + index} style={{borderColor: '#f2f2f2'}}>
                                         <TableRowColumn style={optionsStyles.key} >{option.key}</TableRowColumn>
                                         <TableRowColumn style={optionsStyles.size} >{option.size}</TableRowColumn>
-                                        <TableRowColumn style={optionsStyles.price} >${option.price/100}</TableRowColumn>
+                                        {/* <TableRowColumn style={optionsStyles.price} >${option.price/100}</TableRowColumn> */}
                                         <TableRowColumn style={optionsStyles.quantity} >
                                             <ControlledTextField
                                                 quantity={option.quantity}

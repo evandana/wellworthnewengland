@@ -61,9 +61,9 @@ const OrderDetails = (props) => {
                         <TableRow>
                             <TableHeaderColumn className="order-name">Name</TableHeaderColumn>
                             <TableHeaderColumn className="order-size">Size</TableHeaderColumn>
-                            <TableHeaderColumn className="order-price">Price</TableHeaderColumn>
+                            {/* <TableHeaderColumn className="order-price">Price</TableHeaderColumn> */}
                             <TableHeaderColumn className="order-quantity">Quantity</TableHeaderColumn>
-                            <TableHeaderColumn className="order-total">Total per Item</TableHeaderColumn>
+                            {/* <TableHeaderColumn className="order-total">Total per Item</TableHeaderColumn> */}
                         </TableRow>
                     </TableHeader>
                     <TableBody 
@@ -74,9 +74,9 @@ const OrderDetails = (props) => {
                             return <TableRow key={item.key + index}>
                                 <TableRowColumn className="order-name" >{item.name}</TableRowColumn>
                                 <TableRowColumn className="order-size" >{item.optionSize}</TableRowColumn>
-                                <TableRowColumn className="order-price" >${item.optionPrice}</TableRowColumn>
+                                {/* <TableRowColumn className="order-price" >${item.optionPrice}</TableRowColumn> */}
                                 <TableRowColumn className="order-quantity" >{item.quantity}</TableRowColumn>
-                                <TableRowColumn className="order-total" >${item.quantity * item.optionPrice}</TableRowColumn>
+                                {/* <TableRowColumn className="order-total" >${item.quantity * item.optionPrice}</TableRowColumn> */}
                             </TableRow>
 
                         })}
