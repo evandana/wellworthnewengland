@@ -38,7 +38,7 @@ const buildIconMenu = (permissions, actions) => {
 
 const Navigation = (props) => {
     const { userPermissions, logout, openLoginModal } = props;
-    const titleLink = (<Link className="navigation__title-link" to="/">Well&#8226;Worth</Link>);
+    const titleLink = (<Link className="navigation__title-link" to="/">Well&#8226;Worth New England</Link>);
     const iconMenu = buildIconMenu(userPermissions, { logout, openLoginModal });
     return (
         <div>
