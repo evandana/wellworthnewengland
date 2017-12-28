@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { toggleShowDescription, placeOrder, clearOrderResponses, clearProductQuantities, updateQuantity } from 'actions';
+import { toggleExpandRow, placeOrder, clearOrderResponses, clearProductQuantities, updateQuantity } from 'actions';
 import Products from 'components/view/Products';
 
 const mapStateToProps = (state) => {
@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = { toggleShowDescription, placeOrder, clearOrderResponses, clearProductQuantities, updateQuantity };
+const mapDispatchToProps = { toggleExpandRow, placeOrder, clearOrderResponses, clearProductQuantities, updateQuantity };
 
 const ProductsController = connect(
     mapStateToProps, mapDispatchToProps

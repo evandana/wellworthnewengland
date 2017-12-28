@@ -10,11 +10,14 @@ import {
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
+import IconButton from 'material-ui/IconButton';
 
 import { RESPONSE_CODE_FAIL } from 'constants';
+import IMAGE_MAPPING from 'imageMapping';
 import { CartOrder } from 'components/view/Common/Cart';
 import ControlledTextField from 'components/view/Common/ControlledTextField';
 import './styles.css';
+
 
 class Cart extends Component {
     
@@ -25,10 +28,13 @@ class Cart extends Component {
             openOrderModal: false,
           };
     }
+
     
     render() {
-
-        const { user, products, toggleShowDescription, placeOrder, updateQuantity, clearOrderResponses, clearProductQuantities, asyncResponses } = this.props;
+        
+        const imagePath = './static/images/products/';
+        
+        const { user, products, toggleExpandRow, placeOrder, updateQuantity, clearOrderResponses, clearProductQuantities, asyncResponses } = this.props;
 
         const totalCost = products.length ? products.length > 1 ? products.reduce( (productSum, product) => {
             return reduceProduct(productSum) + reduceProduct(product);
@@ -123,17 +129,19 @@ class Cart extends Component {
                     onClose={onCloseHander}
                     placeOrder={placeOrder}
                     />
-                <Table selectable={false} multiSelectable={false} onCellClick={toggleShowDescription} style={{tableLayout: 'auto' }} fixedHeader={false}>
+                <Table selectable={false} multiSelectable={false} style={{tableLayout: 'auto' }} fixedHeader={false}>
                     <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false} >
-                        <TableRow>
+                        <TableRow style={{borderColor: '#ccc'}}>
+                            <TableHeaderColumn className="cart-name" style={{textAlign: 'center'}}></TableHeaderColumn>
                             <TableHeaderColumn className="cart-name" style={{textAlign: 'center'}}></TableHeaderColumn>
                             <TableHeaderColumn className="cart-item" style={{textAlign: 'center'}}>Total: ${totalCost/100}</TableHeaderColumn>
                             <TableHeaderColumn className="cart-name" style={{textAlign: 'center'}}>
                                 <RaisedButton label="Place Order" primary={true} disabled={!enableOrderButton} onClick={() => { this.setState({openOrderModal: true}) } } />
                             </TableHeaderColumn>
                         </TableRow>
-                        <TableRow>
+                        <TableRow style={{borderColor: '#ccc'}}>
                             <TableHeaderColumn className="cart-name" >Name</TableHeaderColumn>
+                            <TableHeaderColumn className="cart-details" >Details</TableHeaderColumn>
                             <TableHeaderColumn className="cart-options" >Options</TableHeaderColumn>
                             <TableHeaderColumn className="cart-description" >Description</TableHeaderColumn>
                             {/* <TableHeaderColumn className="cart-cost" >Cost</TableHeaderColumn> */}
@@ -141,12 +149,49 @@ class Cart extends Component {
                     </TableHeader>
                     <TableBody displayRowCheckbox={false}>
                         {products.length && products.map((product, index) => {
-                        return <TableRow key={product.options[0].key}>
-                            <TableRowColumn className="cart-name" style={product.expanded ? {whiteSpace: 'normal'} : {}}>{product.title}</TableRowColumn>
-                            <TableRowColumn className="cart-options" style={product.expanded ? {whiteSpace: 'normal'} : {width: '24em'}}>
+                        return <TableRow key={product.options[0].key} style={{borderColor: '#ccc'}}>
+                            <TableRowColumn className="cart-name" style={{whiteSpace: 'normal'}}>{product.title}</TableRowColumn>
+                            <TableRowColumn className="cart-details" style={{textAlign:'center', minWidth:'150px', maxWidth: '200px'}}>
+                                {product.image ? (
+                                    <IconButton 
+                                        style={{float:'left'}}
+                                        iconClassName="material-icons"
+                                        iconStyle={{color:'#555'}}
+                                        hoveredStyle={{backgroundColor:'#eee'}}
+                                        tooltip={product.expanded ? 'Hide image' : 'Show image'}
+                                        tooltipStyles={{marginTop:'-37px'}}
+                                        onClick={() => {
+                                            toggleExpandRow(index,2);
+                                        }}
+                                        >
+                                            photo_camera
+                                    </IconButton>
+                                    ) : ''
+                                }{product.spec ? (
+                                    <IconButton 
+                                        style={{float:'right'}}
+                                        iconClassName="material-icons"
+                                        iconStyle={{color:'#555'}}
+                                        hoveredStyle={{backgroundColor:'#eee'}}
+                                        href={'./specs/' + product.spec}
+                                        tooltip='Open specs'
+                                        tooltipStyles={{marginTop:'-37px'}}
+                                        >
+                                            library_books
+                                    </IconButton>
+                                    ) : '' 
+                                }<br style={{clear:'both'}} />{product.expanded && product.image && product.image.length ? (
+                                    <img 
+                                        src={IMAGE_MAPPING[product.image]}
+                                        style={{maxWidth:'200px',maxHeight:'200px'}}
+                                        />
+                                    ) : ''
+                                }
+                            </TableRowColumn>
+                            <TableRowColumn className="cart-options" style={{width: '24em'}}>
                                 <Table selectable={false}><TableBody displayRowCheckbox={false} style={optionsStyles.details} >
                                 {product.options && product.options.length && product.options.map((option, index) => {
-                                    return <TableRow key={product.item + '__option_' + index} >
+                                    return <TableRow key={product.item + '__option_' + index} style={{borderColor: '#f2f2f2'}}>
                                         <TableRowColumn style={optionsStyles.key} >{option.key}</TableRowColumn>
                                         <TableRowColumn style={optionsStyles.size} >{option.size}</TableRowColumn>
                                         <TableRowColumn style={optionsStyles.price} >${option.price/100}</TableRowColumn>
@@ -167,7 +212,7 @@ class Cart extends Component {
                                 })}
                                 </TableBody></Table>
                             </TableRowColumn>
-                            <TableRowColumn className="cart-description" style={product.expanded ? {whiteSpace: 'normal'} : {}}>{product.description}</TableRowColumn>
+                            <TableRowColumn className="cart-description" style={{whiteSpace: 'normal'}}>{product.description}</TableRowColumn>
                             {/* <TableRowColumn className="cart-cost" style={product.expanded ? {whiteSpace: 'normal'} : {}}>${product.cost}</TableRowColumn> */}
                        </TableRow>
                         })}

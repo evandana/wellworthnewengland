@@ -171,7 +171,7 @@ export function requestFilterOrderTable(col, vals) {
 
 
 /** ROW EXPANSION **/
-export function toggleShowDescription(row, col) {
+export function toggleExpandRow(row, col) {
     return {
         type: TOGGLE_SHOW_DESCRIPTION,
         row, // 0 is first row
