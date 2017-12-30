@@ -114,19 +114,19 @@ class CartOrder extends Component {
                         <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false} >
                             <TableRow>
                                 <TableHeaderColumn className="cart-item" style={{textAlign: 'center'}}>Date</TableHeaderColumn>
-                                <TableHeaderColumn className="cart-name" colSpan={2} style={{textAlign: 'center'}}>Size</TableHeaderColumn>
-                                <TableHeaderColumn className="cart-name" colSpan={2} style={{textAlign: 'center'}}>Email</TableHeaderColumn>
+                                <TableHeaderColumn className="cart-name" style={{textAlign: 'center'}}>Size</TableHeaderColumn>
+                                <TableHeaderColumn className="cart-name" style={{textAlign: 'center'}}>Email</TableHeaderColumn>
                             </TableRow>
                             <TableRow>
-                                <TableHeaderColumn className="cart-name" colSpan={4} style={{textAlign: 'center'}}>Text input for notes</TableHeaderColumn>
-                                <TableHeaderColumn className="cart-item" style={{textAlign: 'center'}}>Total: ${total/100}</TableHeaderColumn>
+                                <TableHeaderColumn className="cart-name" colSpan={3} style={{textAlign: 'center'}}>Text input for notes</TableHeaderColumn>
+                                {/* <TableHeaderColumn className="cart-item" style={{textAlign: 'center'}}>Total: ${total/100}</TableHeaderColumn> */}
                             </TableRow>
                             <TableRow>
                                 <TableHeaderColumn className="cart-item" >Item</TableHeaderColumn>
                                 <TableHeaderColumn className="cart-name" >Size</TableHeaderColumn>
-                                <TableHeaderColumn className="cart-option-price" >Option Price</TableHeaderColumn>
+                                {/* <TableHeaderColumn className="cart-option-price" >Option Price</TableHeaderColumn> */}
                                 <TableHeaderColumn className="cart-quantity" >Quantity</TableHeaderColumn>
-                                <TableHeaderColumn className="cart-quantity" >Cost Per Line</TableHeaderColumn>
+                                {/* <TableHeaderColumn className="cart-quantity" >Cost Per Line</TableHeaderColumn> */}
                             </TableRow>
                         </TableHeader>
                         <TableBody displayRowCheckbox={false}>
@@ -134,14 +134,14 @@ class CartOrder extends Component {
                             return <TableRow key={product.optionKey}>
                                 <TableRowColumn className="cart-item">{product.optionKey}</TableRowColumn>
                                 <TableRowColumn className="cart-name" style={{whiteSpace: 'normal'}}>{product.title} ({product.optionSize ? product.optionSize : <span style={{color:'#ccc'}}>one size</span>})</TableRowColumn>
-                                <TableRowColumn className="cart-option-price" style={{whiteSpace: 'normal'}}><span style={{color:'#ccc'}}>@</span> ${product.optionPrice/100}</TableRowColumn>
+                                {/* <TableRowColumn className="cart-option-price" style={{whiteSpace: 'normal'}}><span style={{color:'#ccc'}}>@</span> ${product.optionPrice/100}</TableRowColumn> */}
                                 <TableRowColumn className="cart-quantity" style={{whiteSpace: 'normal'}}><span style={{color:'#ccc'}}>x</span>  {product.quantity}</TableRowColumn>
-                                <TableRowColumn className="cart-option-price" style={{whiteSpace: 'normal'}}><span style={{color:'#ccc'}}>=</span>  ${product.optionPrice * product.quantity/100}</TableRowColumn>
+                                {/* <TableRowColumn className="cart-option-price" style={{whiteSpace: 'normal'}}><span style={{color:'#ccc'}}>=</span>  ${product.optionPrice * product.quantity/100}</TableRowColumn> */}
                             </TableRow>
                             })}
                         </TableBody>
                     </Table>
-                    <p>Some legal blurb that sounds important and official.</p>
+                    <p>Pricing will be resolved in the usual manner.</p>
                 </Dialog>
             </div>
         )
