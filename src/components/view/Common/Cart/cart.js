@@ -89,7 +89,7 @@ class Cart extends Component {
             this.setState({openOrderModal: false});
         }
 
-        const enableOrderButton = totalCost > 0;
+        const enableOrderButton = totalCost > 0 && orderMetaData.branchName !== '' && orderMetaData.manager !== '';
 
         const recentOrderResponseStatus = asyncResponses && asyncResponses.placeOrderResponses && asyncResponses.placeOrderResponses.length && asyncResponses.placeOrderResponses[0] && asyncResponses.placeOrderResponses[0].status;
 
