@@ -34,7 +34,7 @@ class Cart extends Component {
         
         const imagePath = './static/images/products/';
         
-        const { user, products, orderMetaData, updateManager, updateBranchName, toggleExpandRow, placeOrder, updateQuantity, clearOrderResponses, clearProductQuantities, asyncResponses } = this.props;
+        const { user, products, orderMetaData, updateManager, updateBranchName, toggleExpandAllRows, placeOrder, updateQuantity, clearOrderResponses, clearProductQuantities, asyncResponses } = this.props;
 
         const totalCost = products.length ? products.length > 1 ? products.reduce( (productSum, product) => {
             return reduceProduct(productSum) + reduceProduct(product);
@@ -143,7 +143,7 @@ class Cart extends Component {
                 <Table selectable={false} multiSelectable={false} style={{tableLayout: 'auto' }} fixedHeader={false}>
                     <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false} >
                         <TableRow style={{borderColor: '#ccc'}}>
-                            <TableHeaderColumn colSpan={2} className="cart-name" style={{textAlign: 'center'}}>
+                            <TableHeaderColumn colSpan={3} className="cart-branch-name" style={{textAlign: 'center'}}>
                                 <TextField
                                     floatingLabelText="Branch Name"
                                     value={orderMetaData.branchName}
@@ -151,7 +151,7 @@ class Cart extends Component {
                                     fullWidth={true}
                                     />
                             </TableHeaderColumn>
-                            <TableHeaderColumn className="cart-name" style={{textAlign: 'center'}}>
+                            <TableHeaderColumn className="cart-manager" style={{textAlign: 'center'}}>
                                 <TextField
                                     floatingLabelText="Manager"
                                     value={orderMetaData.manager}
@@ -166,7 +166,19 @@ class Cart extends Component {
                         </TableRow>
                         <TableRow style={{borderColor: '#ccc'}}>
                             <TableHeaderColumn className="cart-name" >Name</TableHeaderColumn>
-                            <TableHeaderColumn className="cart-details" >Details</TableHeaderColumn>
+                            <TableHeaderColumn className="cart-specs"  style={{textAlign: 'center'}}>Specs</TableHeaderColumn>
+                            <TableHeaderColumn className="cart-images" >
+                                <IconButton 
+                                    iconClassName="material-icons"
+                                    iconStyle={{color:'#555'}}
+                                    hoveredStyle={{backgroundColor:'#eee'}}
+                                    tooltip={products && products[0] && products[0].expanded ? 'Hide images' : 'Show images'} // assume all are expanded/collapsed in unison
+                                    tooltipStyles={{marginTop:'-37px'}}
+                                    onClick={toggleExpandAllRows}
+                                    >
+                                        photo_camera
+                                </IconButton>
+                            </TableHeaderColumn>
                             <TableHeaderColumn className="cart-options" >Options</TableHeaderColumn>
                             <TableHeaderColumn className="cart-description" >Description</TableHeaderColumn>
                             {/* <TableHeaderColumn className="cart-cost" >Cost</TableHeaderColumn> */}
@@ -175,24 +187,11 @@ class Cart extends Component {
                     <TableBody displayRowCheckbox={false}>
                         {products.length && products.map((product, index) => {
                         return <TableRow key={product.options[0].key} style={{borderColor: '#ccc'}}>
-                            <TableRowColumn className="cart-name" style={{whiteSpace: 'normal'}}>{product.title}</TableRowColumn>
-                            <TableRowColumn className="cart-details" style={{textAlign:'center', minWidth:'150px', maxWidth: '200px'}}>
-                                {product.image ? (
-                                    <IconButton 
-                                        style={{float:'left'}}
-                                        iconClassName="material-icons"
-                                        iconStyle={{color:'#555'}}
-                                        hoveredStyle={{backgroundColor:'#eee'}}
-                                        tooltip={product.expanded ? 'Hide image' : 'Show image'}
-                                        tooltipStyles={{marginTop:'-37px'}}
-                                        onClick={() => {
-                                            toggleExpandRow(index,2);
-                                        }}
-                                        >
-                                            photo_camera
-                                    </IconButton>
-                                    ) : ''
-                                }{product.spec ? (
+                            <TableRowColumn className="cart-name" style={{whiteSpace: 'normal'}}>
+                                {product.title}
+                            </TableRowColumn>
+                            <TableRowColumn className="cart-specs">
+                                {product.spec ? (
                                     <IconButton 
                                         style={{float:'right'}}
                                         iconClassName="material-icons"
@@ -205,7 +204,10 @@ class Cart extends Component {
                                             library_books
                                     </IconButton>
                                     ) : '' 
-                                }<br style={{clear:'both'}} />{product.expanded && product.image && product.image.length ? (
+                                }
+                            </TableRowColumn>
+                            <TableRowColumn className="cart-images" style={products && products[0] && products[0].expanded ? {textAlign:'center', minWidth:'150px', maxWidth: '200px'} : {}}>
+                                {product.expanded && product.image && product.image.length ? (
                                     <img 
                                         src={IMAGE_MAPPING[product.image]}
                                         style={{maxWidth:'200px',maxHeight:'200px'}}

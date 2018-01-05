@@ -1,5 +1,5 @@
 import {
-    TOGGLE_SHOW_DESCRIPTION,
+    TOGGLE_EXPAND_ALL_ROWS,
     UPDATE_QUANTITY,
     UPDATE_PRODUCTS,
     PLACE_ORDER,
@@ -388,11 +388,14 @@ const initialState = [
 ];
 
 function products(state = initialState, action) {
-    const { type, row, productId, optionKey, quantity, products, orderMeta, response } = action;
+    const { type, productId, optionKey, quantity, products, orderMeta, response } = action;
 
-    if (type === TOGGLE_SHOW_DESCRIPTION) {
+    if (type === TOGGLE_EXPAND_ALL_ROWS) {
 
-        state[row].expanded = !state[row].expanded;
+		state.map(row => {
+			row.expanded = !row.expanded;
+			return row;
+		})
 
         return [
             ...state,

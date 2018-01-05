@@ -5,11 +5,11 @@ import { Cart } from 'components/view/Common/Cart';
 
 const Products = (props) => {
     
-    const { user, location, userPermissions, products, orderMetaData, updateManager, updateBranchName, toggleExpandRow, placeOrder, updateQuantity, clearOrderResponses, clearProductQuantities, asyncResponses } = props;
+    const { user, location, userPermissions, products, orderMetaData, updateManager, updateBranchName, toggleExpandAllRows, placeOrder, updateQuantity, clearOrderResponses, clearProductQuantities, asyncResponses } = props;
 
     const cartProps = {
         products,
-        toggleExpandRow,
+        toggleExpandAllRows,
         updateQuantity,
         rowIndexExpanded: 0,
         placeOrder,
