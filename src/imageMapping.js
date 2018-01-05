@@ -16,9 +16,7 @@ import img_13b_TorkTowels from './static/images/products/13b_TorkTowels.jpg'
 import img_14_Motor from './static/images/products/14_Motor.jpg'
 import img_OdorMedic from './static/images/products/OdorMedic.jpg'
 import img__DoubleDazzle from './static/images/products/_DoubleDazzle.jpg'
-import img__MF1MicoFiberTowels from './static/images/products/_MF1MicoFiberTowels.jpg'
 import img__N903NitrileGloves from './static/images/products/_N903NitrileGloves.jpg'
-import img__NWP310 from './static/images/products/_NWP310.jpg'
 import img__Picture023 from './static/images/products/_Picture023.jpg'
 import img__VH20VacHose from './static/images/products/_VH20VacHose.jpg'
 import img__VV2 from './static/images/products/_VV2.jpg'
@@ -51,9 +49,7 @@ const IMAGE_MAPPING = {
     '14_Motor.jpg': img_14_Motor,
     'OdorMedic.jpg': img_OdorMedic,
     '_DoubleDazzle.jpg': img__DoubleDazzle,
-    '_MF1MicoFiberTowels.jpg': img__MF1MicoFiberTowels,
     '_N903NitrileGloves.jpg': img__N903NitrileGloves,
-    '_NWP310.jpg': img__NWP310,
     '_Picture023.jpg': img__Picture023,
     '_VH20VacHose.jpg': img__VH20VacHose,
     '_VV2.jpg': img__VV2,
