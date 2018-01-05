@@ -73,7 +73,7 @@ class App extends Component {
                             <Switch>
                                 <Route exact path="/" component={Home}/>
                                 <AuthorizedRoute exact path="/products" component={Products} />
-                                <AuthorizedRoute exact path="/orders" component={Admin} />
+                                <AuthorizedRoute exact path="/orders" component={Admin} /> 
                                 <AuthorizedRoute path="/admin" component={Admin} />
                             </Switch>
                             <AppModal />

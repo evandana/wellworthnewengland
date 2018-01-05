@@ -23,7 +23,7 @@ class CartOrder extends Component {
     
     render() {
     
-        const { products, open, placeOrder, onClose, user } = this.props;
+        const { products, open, placeOrder, onClose, user, orderMetaData } = this.props;
 
         const productsOrdered = [];
         
@@ -103,6 +103,8 @@ class CartOrder extends Component {
                                             name: user.displayName,
                                         },
                                         total,
+                                        branchName: orderMetaData.branchName,
+                                        manager: orderMetaData.manager,
                                     }
                                 )
                                 onClose();
@@ -122,20 +124,14 @@ class CartOrder extends Component {
                                 </TableHeaderColumn>
                                 <TableHeaderColumn className="cart-name" style={{textAlign: 'center'}}>Email: {user.email}</TableHeaderColumn>
                             </TableRow>
-                            {/* <TableRow>
-                                <TableHeaderColumn className="cart-name" colSpan={3} style={{textAlign: 'center'}}> */}
-                                {/* Adding a notes box will take a good amount of work */}
-                                    {/* <TextField
-                                        hintText="Add notes here"
-                                        floatingLabelText="Notes"
-                                        value={user.orderNotes}
-
-                                        multiLine={true}
-                                        rows={2}
-                                        />
-                                </TableHeaderColumn> */}
-                                {/* <TableHeaderColumn className="cart-item" style={{textAlign: 'center'}}>Total: ${total/100}</TableHeaderColumn> */}
-                            {/* </TableRow> */}
+                            <TableRow>
+                                <TableHeaderColumn colSpan={2} className="cart-item" style={{textAlign: 'center'}}>
+                                    Branch Name: {orderMetaData.branchName}
+                                </TableHeaderColumn>
+                                <TableHeaderColumn className="cart-item" style={{textAlign: 'center'}}>
+                                    Manager: {orderMetaData.manager}
+                                </TableHeaderColumn>
+                            </TableRow>
                             <TableRow>
                                 <TableHeaderColumn className="cart-item" >Item</TableHeaderColumn>
                                 <TableHeaderColumn className="cart-name" >Size</TableHeaderColumn>
