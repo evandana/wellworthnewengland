@@ -46,7 +46,9 @@ function createEmailHtml(order) {
   var emailStr = '';
   emailStr += 'ORDER FROM ZELLNER DISTRIBUTING WEBSITE' + '<br/><br/>';
   emailStr += 'FROM: ' + order.customerInfo.name + ' ('+order.customerInfo.email+')' + '<br/><br/>';
-  emailStr += 'TIME: ' + new Date(order.timestamp) + ')' + '<br/><br/>';
+  emailStr += 'TIME: ' + new Date(order.timestamp) + '<br/><br/>';
+  emailStr += 'BRANCH NAME: ' + order.branchName + '<br/><br/>';
+  emailStr += 'MANAGER: ' + order.manager + '<br/><br/>';
   // emailStr += 'TOTAL: $' + order.total/100 + '<br/>';
   emailStr += 'ITEMS: ' + '<br/>';
 

@@ -62,6 +62,8 @@ function* placeOrder(orderData) {
                     placed: true,
                 },
                 total: orderMeta.total,
+                manager: orderMeta.manager,
+                branchName: orderMeta.branchName,
             },
             { 
                 items: products 

@@ -18,6 +18,10 @@ import {
     PLACE_ORDER_RESPONSE,
     CLEAR_ORDER_RESPONSES,
     CLEAR_PRODUCT_QUANTITIES,
+
+    // ORDER META DATA
+    UPDATE_MANAGER,
+    UPDATE_BRANCH_NAME,
     
     // ORDERS,
     GET_ORDERS,
@@ -123,6 +127,22 @@ export function clearProductQuantities() {
     }
 }
 
+
+
+/** ORDER META DATA **/
+export function updateManager(inputValue) {
+    return {
+        type: UPDATE_MANAGER,
+        inputValue
+    };
+}
+
+export function updateBranchName(inputValue) {
+    return {
+        type: UPDATE_BRANCH_NAME,
+        inputValue
+    };
+} 
 
 /** ORDERS */
 export function getOrders(orders) {

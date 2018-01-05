@@ -34,7 +34,7 @@ class Cart extends Component {
         
         const imagePath = './static/images/products/';
         
-        const { user, products, toggleExpandRow, placeOrder, updateQuantity, clearOrderResponses, clearProductQuantities, asyncResponses } = this.props;
+        const { user, products, orderMetaData, updateManager, updateBranchName, toggleExpandRow, placeOrder, updateQuantity, clearOrderResponses, clearProductQuantities, asyncResponses } = this.props;
 
         const totalCost = products.length ? products.length > 1 ? products.reduce( (productSum, product) => {
             return reduceProduct(productSum) + reduceProduct(product);
@@ -107,6 +107,16 @@ class Cart extends Component {
                 clearProductQuantities();
             }
         }
+        
+        function updateOrderMetaDataBranchName (evt) {
+            // console.log('updateOrderMetaDataBranchName', evt);
+            updateBranchName(evt.target.value);
+        }
+        
+        function updateOrderMetaDataManager (evt) {
+            // console.log('updateOrderMetaDataManager', evt.target.value);
+            updateManager(evt.target.value);
+        }
 
         return (
             <div style={{minWidth:'850px'}}>
@@ -124,6 +134,7 @@ class Cart extends Component {
                 }
                 <CartOrder 
                     products={products}
+                    orderMetaData={orderMetaData}
                     user={user}
                     open={this.state.openOrderModal}
                     onClose={onCloseHander}
@@ -132,8 +143,22 @@ class Cart extends Component {
                 <Table selectable={false} multiSelectable={false} style={{tableLayout: 'auto' }} fixedHeader={false}>
                     <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false} >
                         <TableRow style={{borderColor: '#ccc'}}>
-                            <TableHeaderColumn className="cart-name" style={{textAlign: 'center'}}></TableHeaderColumn>
-                            <TableHeaderColumn className="cart-name" colSpan={2} style={{textAlign: 'center'}}></TableHeaderColumn>
+                            <TableHeaderColumn colSpan={2} className="cart-name" style={{textAlign: 'center'}}>
+                                <TextField
+                                    floatingLabelText="Branch Name"
+                                    value={orderMetaData.branchName}
+                                    onChange={updateOrderMetaDataBranchName}
+                                    fullWidth={true}
+                                    />
+                            </TableHeaderColumn>
+                            <TableHeaderColumn className="cart-name" style={{textAlign: 'center'}}>
+                                <TextField
+                                    floatingLabelText="Manager"
+                                    value={orderMetaData.manager}
+                                    onChange={updateOrderMetaDataManager}
+                                    fullWidth={true}
+                                    />
+                            </TableHeaderColumn>
                             {/* <TableHeaderColumn className="cart-item" style={{textAlign: 'center'}}>Total: ${totalCost/100}</TableHeaderColumn> */}
                             <TableHeaderColumn className="cart-name" style={{textAlign: 'center'}}>
                                 <RaisedButton label="Place Order" primary={true} disabled={!enableOrderButton} onClick={() => { this.setState({openOrderModal: true}) } } />

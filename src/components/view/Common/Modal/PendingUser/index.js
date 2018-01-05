@@ -25,7 +25,7 @@ class PendingUser extends Component {
     }
     
     onSubmit() {
-        const superSecretKey = "headytopper";
+        const superSecretKey = "enterprise07";
         const { updateUserPermissions } = this.props;
         if (this.inputValue.toLowerCase() === superSecretKey) {
             // this.setState({

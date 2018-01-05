@@ -272,6 +272,8 @@ const Orders = (props) => {
                                 filter_list
                             </IconButton>
                         </TableHeaderColumn>
+                        <TableHeaderColumn className="order-branch-name">Branch Name</TableHeaderColumn>
+                        <TableHeaderColumn className="order-manager">Manager</TableHeaderColumn>
                         {/* <TableHeaderColumn className="order-total">Total</TableHeaderColumn> */}
                         <TableHeaderColumn className="order-state">
                             <div
@@ -322,6 +324,7 @@ const Orders = (props) => {
                                 })}
                             </SelectField> )}
                         </TableHeaderColumn>
+                        <TableHeaderColumn colSpan={2} className="order-total"></TableHeaderColumn>
                         {/* <TableHeaderColumn className="order-total"></TableHeaderColumn> */}
                         <TableHeaderColumn className="order-state">
                             {ordersFilterObj.col !== COL_STATUS ? '' : (
@@ -359,6 +362,12 @@ const Orders = (props) => {
                             </TableRowColumn>
                             <TableRowColumn className="order-customer" >
                                 {order.customerInfo.name}
+                            </TableRowColumn>
+                            <TableRowColumn className="order-branch-name" >
+                                {order.branchName}
+                            </TableRowColumn>
+                            <TableRowColumn className="order-manager" >
+                                {order.manager}
                             </TableRowColumn>
                             {/* <TableRowColumn className="order-total" >${order.total/100}</TableRowColumn> */}
                             <TableRowColumn className="order-state" >
