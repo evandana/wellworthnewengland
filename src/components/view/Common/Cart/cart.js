@@ -167,7 +167,7 @@ class Cart extends Component {
                         <TableRow style={{borderColor: '#ccc'}}>
                             <TableHeaderColumn className="cart-name" >Name</TableHeaderColumn>
                             <TableHeaderColumn className="cart-specs"  style={{textAlign: 'center'}}>Specs</TableHeaderColumn>
-                            <TableHeaderColumn className="cart-images" >
+                            <TableHeaderColumn className="cart-images" style={{textAlign: 'center'}}>
                                 <IconButton 
                                     iconClassName="material-icons"
                                     iconStyle={{color:'#555'}}
