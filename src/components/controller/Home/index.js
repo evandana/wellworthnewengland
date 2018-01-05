@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { openLoginModal, toggleExpandRow, updateQuantity, updateManager, updateBranchName } from 'actions';
+import { openLoginModal, toggleExpandAllRows, updateQuantity, updateManager, updateBranchName } from 'actions';
 import Home from 'components/view/Home';
 
 const mapStateToProps = (state) => {
@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = { openLoginModal, toggleExpandRow, updateQuantity, updateManager, updateBranchName };
+const mapDispatchToProps = { openLoginModal, toggleExpandAllRows, updateQuantity, updateManager, updateBranchName };
 
 const HomeController = connect(
     mapStateToProps, mapDispatchToProps

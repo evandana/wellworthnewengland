@@ -32,7 +32,7 @@ import {
     REQUEST_FILTER_ORDER_TABLE,
 
     // ROW EXPANSION
-    TOGGLE_SHOW_DESCRIPTION,
+    TOGGLE_EXPAND_ALL_ROWS,
 
     // PRICE UPDATES
     UPDATE_QUANTITY,
@@ -191,11 +191,9 @@ export function requestFilterOrderTable(col, vals) {
 
 
 /** ROW EXPANSION **/
-export function toggleExpandRow(row, col) {
+export function toggleExpandAllRows() {
     return {
-        type: TOGGLE_SHOW_DESCRIPTION,
-        row, // 0 is first row
-        col, // 0 is first column
+        type: TOGGLE_EXPAND_ALL_ROWS
     };
 } 
 
