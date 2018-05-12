@@ -1,5 +1,4 @@
 import React from 'react';
-import './styles.css';
 
 const NotAuthorizedPage = props => {
 
@@ -9,9 +8,8 @@ const NotAuthorizedPage = props => {
 
     return (
         <div className="page">
-            <div className="loader">
-                <div className="loader-spinner" />
-            </div>
+            You don't have permissions to access {path}. 
+            Please try log in as an authorized user or try hacking the system to gain access.
         </div>
     );
 };

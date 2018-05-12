@@ -41,13 +41,12 @@ export function loginGoogleRequest() {
 }
 
 export function setCurrentUser(user) {
-    const { email='', displayName='', permissions={}, uid=null } = user;
+    const { email, displayName, permissions, uid } = user;
     return {
         email,
         displayName,
         permissions,
         uid,
-        authInitiated: true,
         type: SET_CURRENT_USER,
     };
 }
