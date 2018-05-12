@@ -20,23 +20,5 @@ apidocs
 .DS_Store*
 Thumbs.db
 
-# dependencies
-/node_modules
-
-# testing
-/coverage
-
-# production
-/build
-
-# misc
-.DS_Store
-.env.*
-src/config.js
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
 # Private Notes
 notes
