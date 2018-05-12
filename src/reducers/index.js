@@ -4,7 +4,6 @@ import products from './products.js';
 import orders from './orders.js';
 import asyncResponses from './async-responses.js';
 import ordersSortObj from './orders-sort-obj';
-import ordersFilterObj from './orders-filter-obj';
 
 function isLoggedIn(state = false, action) {
     return state;
@@ -18,7 +17,6 @@ const reducers = {
     orders,
     asyncResponses,
     ordersSortObj,
-    ordersFilterObj,
 };
 
 export default reducers;
