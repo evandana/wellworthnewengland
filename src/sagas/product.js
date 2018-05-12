@@ -9,12 +9,7 @@ import { updateProducts as updateProductsAction } from 'actions';
 function* getProducts() {
     window._FIREBASE_DB_.ref('/products/')
         .on('value', (snapshot) => {
-
-            // get vals
-            const products = snapshot.val()
-                // filter out any null products
-                .filter(p => !!p);
-
+            const products = snapshot.val();
             window._UI_STORE_.dispatch(updateProductsAction(products));
         });
     yield;
