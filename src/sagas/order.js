@@ -52,11 +52,13 @@ function* requestUpdateOrder(orderData) {
 function* placeOrder(orderData) {
     let {orderMeta, products} = orderData;
 
+    const timeNow = new Date();
+
     window._FIREBASE_DB_.ref('/orders/')
         .push(Object.assign({}, 
             orderMeta,
             { 
-                timestamp: orderMeta.timestamp,
+                timestamp: timeNow.toTimeString(),
                 customerInfo: orderMeta.customerInfo,
                 state: {
                     placed: true,

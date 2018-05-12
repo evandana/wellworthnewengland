@@ -94,7 +94,6 @@ class CartOrder extends Component {
                                 placeOrder(
                                     productsOrdered,
                                     {
-                                        timestamp: new Date().getTime(),
                                         customerInfo: {
                                             email: user.email,
                                             name: user.displayName,

@@ -7,7 +7,7 @@ const initialState = {
     dir: 1,
 };
 
-function ordersSortObj(state = initialState, action) {
+function orders(state = initialState, action) {
     const { type, col } = action;
 
     if (type === REQUEST_SORT_ORDER_TABLE) {
@@ -34,4 +34,4 @@ function ordersSortObj(state = initialState, action) {
     }
 }
 
-export default ordersSortObj;
+export default orders;
