@@ -14,11 +14,11 @@ export const OPEN_MODAL = 'OPEN_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 
 /** USER PERMISSION STATUSES **/
-// export const ANONYMOUS = 'ANONYMOUS';
-// export const PENDING = 'PENDING';
-// export const CUSTOMER = 'CUSTOMER';
-// export const SELLER = 'SELLER';
-// export const ADMIN = 'ADMIN';
+export const ANONYMOUS = 'ANONYMOUS';
+export const PENDING = 'PENDING';
+export const CUSTOMER = 'CUSTOMER';
+export const SELLER = 'SELLER';
+export const ADMIN = 'ADMIN';
 
 /** PRODUCTS */
 export const GET_PRODUCTS = 'GET_PRODUCTS';

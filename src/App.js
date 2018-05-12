@@ -43,7 +43,6 @@ class App extends Component {
                     const userData = {
                         uid: user.uid,
                         displayName: user.displayName,
-                        permissions: user.permissions,
                     };
 
                     window._UI_STORE_.dispatch(getUser(user.uid, userData));

@@ -26,12 +26,12 @@ class PendingUser extends Component {
     
     onSubmit() {
         const superSecretKey = "headytopper";
-        const { updateUserPermissions } = this.props;
+        const { updateUserRole } = this.props;
         if (this.inputValue.toLowerCase() === superSecretKey) {
-            // this.setState({
-            //     validInput: true,
-            // });
-            updateUserPermissions();
+            this.setState({
+                errorText: 'This Key is correct but I we\'re still under development',
+            });
+            updateUserRole();
         } else {
             this.setState({
                 errorText: 'Please enter a valid customer key',
