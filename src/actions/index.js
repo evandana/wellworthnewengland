@@ -24,7 +24,6 @@ import {
     UPDATE_ORDERS,
     TOGGLE_ORDER_DETAILS,
     REQUEST_UPDATE_ORDER,
-    REQUEST_SORT_ORDER_TABLE,
 
     // ROW EXPANSION
     TOGGLE_SHOW_DESCRIPTION,
@@ -150,14 +149,6 @@ export function requestUpdateOrder(key, order) {
         order,
         key,
     }
-}
-
-export function requestSortOrderTable(col) {
-    
-    return {
-        type: REQUEST_SORT_ORDER_TABLE,
-        col,
-    };
 }
 
 
