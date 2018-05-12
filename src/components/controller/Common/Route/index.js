@@ -1,14 +1,7 @@
 import { connect } from 'react-redux';
-import AuthorizedRoute from 'components/view/Common/Route';
+import AuthorizedRoute from '../../../view/Common/Route';
 
-const mapStateToProps = (state) => {
-    return {
-        userRole: state.user.role,
-    }
-};
-
-const AuthorizedRouteController = connect(
-    mapStateToProps
-)(AuthorizedRoute);
+const mapStateToProps = (state) => ({isLoggedIn: !!state.user});
+const AuthorizedRouteController = connect(mapStateToProps)(AuthorizedRoute);
 
 export default AuthorizedRouteController;

@@ -17,7 +17,6 @@ export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const ANONYMOUS = 'ANONYMOUS';
 export const PENDING = 'PENDING';
 export const CUSTOMER = 'CUSTOMER';
-export const SELLER = 'SELLER';
 export const ADMIN = 'ADMIN';
 
 /** PRODUCTS */

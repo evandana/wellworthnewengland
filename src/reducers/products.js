@@ -2,6 +2,7 @@ import {
     TOGGLE_SHOW_DESCRIPTION,
     UPDATE_QUANTITY,
     UPDATE_PRODUCTS,
+    GET_PRODUCTS
 } from '../constants';
 
 const initialState = [

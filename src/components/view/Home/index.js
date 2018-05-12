@@ -1,38 +1,34 @@
 import React from 'react';
-import { ANONYMOUS, SELLER, CUSTOMER } from 'constants.js';
-import { Redirect } from 'react-router-dom';
+import { ANONYMOUS } from 'constants.js';
+import Cart from 'components/view/Common/Cart';
 
 const Home = (props) => {
     
-    const { userRole, openModal } = props;
+    const { userRole, openModal, products, toggleShowDescription, updateQuantity } = props;
+
+    const cartProps = {
+        products,
+        toggleShowDescription,
+        updateQuantity,
+        rowIndexExpanded: 0
+    };
     
-    let defaultView = '';
+    let greeting = '';
     
-    switch (userRole) {
-        case CUSTOMER: 
-            defaultView = (
-                <Redirect to="/products"/>
-            );
-            break;
-        case SELLER: 
-            defaultView = (
-                <Redirect to="/admin"/>
-            );
-            break;
-        case ANONYMOUS:
-        default:
-            defaultView = (
-                <div>
-                    Welcome to the Well Worth New England site.  
-                    Please <span className="fake-link" onClick={openModal}>Login</span> to register as a customer.
-                </div>
-            );
-            break;
+    if (userRole === ANONYMOUS) {
+        greeting = (
+            <div>
+                Welcome to the Well Worth New England site.  
+                Please <span className="fake-link" onClick={openModal}>Login</span> to register as a customer.
+            </div>
+        );
     }
     
     return(
         <div className='page'>
-           {defaultView}
+            <h2>Welcome</h2>
+           {greeting}
+           <Cart {...cartProps} />
         </div>
     );
     
