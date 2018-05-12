@@ -1,11 +1,12 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { Cart } from 'components/view/Common/Cart';
+import NotAuthorized from 'components/view/NotAuthorized';
 
 
 const Products = (props) => {
     
-    const { user, location, userPermissions, products, orderMetaData, updateManager, updateBranchName, toggleExpandRow, placeOrder, updateQuantity, clearOrderResponses, clearProductQuantities, asyncResponses } = props;
+    const { user, location, userPermissions, products, toggleExpandRow, placeOrder, updateQuantity, clearOrderResponses, clearProductQuantities, asyncResponses } = props;
 
     const cartProps = {
         products,
@@ -16,9 +17,6 @@ const Products = (props) => {
         asyncResponses,
         clearOrderResponses,
         clearProductQuantities,
-        orderMetaData,
-        updateManager, 
-        updateBranchName,
         user,
     };
     
