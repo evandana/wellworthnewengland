@@ -4,7 +4,7 @@ import TextField from 'material-ui/TextField';
 
 const propTypes = {
     autoComplete: PropTypes.string,
-    errorText: PropTypes.string,
+    errorText: PropTypes.bool,
     hint: PropTypes.string,
     id: PropTypes.string.isRequired,
     label: PropTypes.string,
@@ -50,6 +50,14 @@ class Input extends Component {
             id,
             label,
         } = this.props;
+        
+        const {
+            value,
+        } = this.state;
+        
+        const labelProps = {
+            htmlFor: id,
+        };
         
         const textFieldProps = {
             errorText,

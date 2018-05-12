@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
-import { logoutUserRequest, updateUser } from 'actions';
-import { CUSTOMER } from 'constants.js';
+import { logoutUserRequest } from 'actions';
 import PendingUser from 'components/view/Common/Modal/PendingUser';
 
 const mapStateToProps = (state) => {
@@ -13,7 +12,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchActions = {
     logoutUserRequest,
-    updateUserRole: () => updateUser({role: CUSTOMER}),
 };
 
 const PendingUserController = connect(

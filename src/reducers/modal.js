@@ -1,5 +1,6 @@
 import {
     OPEN_MODAL,
+    CLOSE_MODAL,
 } from '../constants';
 
 const initialState = {
@@ -9,7 +10,7 @@ const initialState = {
 };
 
 function modal(state = initialState, action) {
-    const { type, activeModal } = action;
+    const { type, open, activeModal } = action;
 
     if (type === OPEN_MODAL) {
         return {
