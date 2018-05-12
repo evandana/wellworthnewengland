@@ -118,23 +118,18 @@ class CartOrder extends Component {
                         <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false} >
                             <TableRow>
                                 <TableHeaderColumn colSpan={2} className="cart-item" style={{textAlign: 'center'}}>
-                                    Order will be placed: 
-                                    <span style={{color:'#000'}}>
-                                        <TimeFormatter
-                                            time={new Date().getTime()}
-                                            />
-                                    </span>
+                                    Order will be placed: <TimeFormatter
+                                        time={new Date().getTime()}
+                                        />
                                 </TableHeaderColumn>
-                                <TableHeaderColumn className="cart-name" style={{textAlign: 'center'}}>
-                                    Email: <span style={{color:'#000'}}>{user.email}</span>
-                                </TableHeaderColumn>
+                                <TableHeaderColumn className="cart-name" style={{textAlign: 'center'}}>Email: {user.email}</TableHeaderColumn>
                             </TableRow>
                             <TableRow>
                                 <TableHeaderColumn colSpan={2} className="cart-item" style={{textAlign: 'center'}}>
-                                    Branch Name: <span style={{color:'#000'}}>{orderMetaData.branchName}</span>
+                                    Branch Name: {orderMetaData.branchName}
                                 </TableHeaderColumn>
                                 <TableHeaderColumn className="cart-item" style={{textAlign: 'center'}}>
-                                    Manager: <span style={{color:'#000'}}>{orderMetaData.manager}</span>
+                                    Manager: {orderMetaData.manager}
                                 </TableHeaderColumn>
                             </TableRow>
                             <TableRow>
