@@ -1,7 +1,6 @@
 import {
     UPDATE_ORDERS,
     TOGGLE_ORDER_DETAILS,
-    REQUEST_UPDATE_ORDER,
 } from '../constants';
 
 const initialState = [

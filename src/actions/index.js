@@ -23,7 +23,6 @@ import {
     GET_ORDERS,
     UPDATE_ORDERS,
     TOGGLE_ORDER_DETAILS,
-    REQUEST_UPDATE_ORDER,
 
     // ROW EXPANSION
     TOGGLE_SHOW_DESCRIPTION,
@@ -140,14 +139,6 @@ export function toggleOrderDetails(row) {
     return {
         type: TOGGLE_ORDER_DETAILS,
         row,
-    }
-}
-
-export function requestUpdateOrder(key, order) {
-    return {
-        type: REQUEST_UPDATE_ORDER,
-        order,
-        key,
     }
 }
 
