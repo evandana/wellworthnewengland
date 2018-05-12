@@ -5,7 +5,6 @@ import {
     PLACE_ORDER,
     RESPONSE_CODE_SUCCESS,
     RESPONSE_CODE_FAIL,
-    REQUEST_UPDATE_ORDER,
 } from 'constants.js';
 
 import { updateOrders as updateOrdersAction, placeOrderResponse as placeOrderResponseAction, clearProductQuantities  } from 'actions';
@@ -16,24 +15,6 @@ function* getOrders() {
             const orders = snapshot.val();
             window._UI_STORE_.dispatch(updateOrdersAction(orders));
         });
-    yield;
-}
-
-function* requestUpdateOrder(orderData) {
-    let {key, order} = orderData;
-    window._FIREBASE_DB_.ref('/orders/' + key)
-        .set(order);
-        //     , 
-        //     function(error) {
-        //         if (error) {
-        //             let {code, message} = error;
-        //             window._UI_STORE_.dispatch(placeOrderResponseAction({status: RESPONSE_CODE_FAIL, code, message}));
-        //         } else {
-        //             window._UI_STORE_.dispatch(placeOrderResponseAction({status: RESPONSE_CODE_SUCCESS}));
-        //             window._UI_STORE_.dispatch(clearProductQuantities());
-        //         }
-        //     }
-        // );
     yield;
 }
 
@@ -70,6 +51,5 @@ export default function* () {
     yield [
         takeEvery(GET_ORDERS, getOrders),
         takeEvery(PLACE_ORDER, placeOrder),
-        takeEvery(REQUEST_UPDATE_ORDER, requestUpdateOrder),
     ];
 }

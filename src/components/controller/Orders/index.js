@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { toggleOrderDetails, placeOrder, requestUpdateOrder } from 'actions';
+import { toggleOrderDetails, placeOrder } from 'actions';
 import { Orders } from 'components/view/Orders';
 
 const mapStateToProps = (state) => {
@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = { toggleOrderDetails, placeOrder, requestUpdateOrder };
+const mapDispatchToProps = { toggleOrderDetails, placeOrder };
 
 const OrdersController = connect(
     mapStateToProps, mapDispatchToProps
