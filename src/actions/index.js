@@ -1,14 +1,9 @@
 import {
-    // AUTHENTICATION
+    //AUTHENTICATION
     LOGIN_GOOGLE_REQUEST,
     LOGOUT_USER_REQUEST,
+    SET_CURRENT_USER,
     
-    // USER
-    GET_USER,
-    UPDATE_USER,
-    SET_CURRENT_USER,    
-
-    // MODALS
     OPEN_MODAL,
 } from '../constants';
 
@@ -18,13 +13,12 @@ export function loginGoogleRequest() {
 }
 
 export function setCurrentUser(user) {
-    const { displayName, role, uid } = user;
+    const { displayName, uid } = user;
     return {
         displayName,
-        role,
         uid,
         type: SET_CURRENT_USER,
-    };
+    }
 }
 
 export function logoutUserRequest() {
@@ -33,24 +27,8 @@ export function logoutUserRequest() {
     };
 }
 
-/** USER **/
-export function getUser(uid, userData=null) {
-    return {
-        uid,
-        userData,
-        type: GET_USER,
-    };
-}
-
-export function updateUser(userData) {
-    return {
-        userData,
-        type: UPDATE_USER
-    };
-}
-
 export function openModal() {
     return {
         type: OPEN_MODAL,
-    };
+    }
 }
