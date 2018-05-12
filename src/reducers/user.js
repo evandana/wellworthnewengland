@@ -1,9 +1,11 @@
 import {
     SET_CURRENT_USER,
+    ANONYMOUS,
+    PENDING,
 } from '../constants';
 
 const defaultUser = {
-    permissions: {},
+    role: ANONYMOUS,
     name: '',
     uid: '',
 };
@@ -13,7 +15,7 @@ function user(state = defaultUser, action) {
     
     if (type === SET_CURRENT_USER) {
         return {
-            permissions: {basic: true},
+            role: PENDING,
             ...rest,
         };
     } else {

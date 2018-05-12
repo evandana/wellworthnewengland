@@ -3,6 +3,7 @@ import { select, takeEvery } from 'redux-saga/effects';
 import {
     GET_USER,
     UPDATE_USER,
+    PENDING,
 } from 'constants.js';
 
 import { setCurrentUser, updateUser as updateUserAction } from 'actions';
@@ -12,9 +13,8 @@ function* getUser({uid, userData}) {
     window._FIREBASE_DB_.ref('/users/' + uid)
         .on('value', (snapshot) => {
             const user = snapshot.val();
-            
             if (!user) {
-                window._UI_STORE_.dispatch(updateUserAction({...userData, permissions: {basic: true}}));
+                window._UI_STORE_.dispatch(updateUserAction({...userData, role: PENDING}));
             } else {
                 window._UI_STORE_.dispatch(setCurrentUser(user));
             }
@@ -31,7 +31,7 @@ function* updateUser({userData}) {
         cleanUser = {
             uid: userData.uid,
             displayName: userData.displayName,
-            permissions: userData.permissions,
+            role: userData.role,
         };
     } else {
         cleanUser = {...currentUser, ...userData};

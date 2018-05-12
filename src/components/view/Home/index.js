@@ -1,32 +1,37 @@
 import React from 'react';
+import { ANONYMOUS, SELLER, CUSTOMER } from 'constants.js';
 import { Redirect } from 'react-router-dom';
 
 const Home = (props) => {
     
-    const { userPermissions, openModal } = props;
+    const { userRole, openModal } = props;
     
     let defaultView = '';
     
-    if (userPermissions.admin || userPermissions.seller) {
-        defaultView = (
-            <Redirect to="/admin"/>
-        );
-    } else if (userPermissions.products) {
-        defaultView = (
-            <Redirect to="/products"/>
-        );
-    } else {
-        defaultView = (
-            <div>
-                Welcome to the Well Worth New England site.  
-                Please <span className="fake-link" onClick={openModal}>Login</span> to register as a customer.
-            </div>
-        );
+    switch (userRole) {
+        case CUSTOMER: 
+            defaultView = (
+                <Redirect to="/products"/>
+            );
+            break;
+        case SELLER: 
+            defaultView = (
+                <Redirect to="/admin"/>
+            );
+            break;
+        case ANONYMOUS:
+        default:
+            defaultView = (
+                <div>
+                    Welcome to the Well Worth New England site.  
+                    Please <span className="fake-link" onClick={openModal}>Login</span> to register as a customer.
+                </div>
+            );
+            break;
     }
     
     return(
         <div className='page'>
-            <h1>home</h1>
            {defaultView}
         </div>
     );

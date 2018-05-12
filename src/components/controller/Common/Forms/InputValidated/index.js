@@ -10,7 +10,7 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
     const onChange = function onChange(event) {
         const val = event.target.value;
         const { validationCheck } = this.props;
-        const validationResult = validationCheck(val);
+        // const validationResult = validationCheck(val);
     };
     
     return {
