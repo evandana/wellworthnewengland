@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import NotAuthorized from 'components/view/NotAuthorized';
 import {
     Table,
     TableBody,

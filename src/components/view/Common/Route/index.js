@@ -13,7 +13,7 @@ const AuthorizedRoute = (props) => {
 
     return (
         <Route {...rest} render={props => (
-            userPermissions.basic || userPermissions.admin || userPermissions.seller ? (
+            userPermissions.admin || userPermissions.seller ? (
                     <Component {...props}/>
                 ) : (
                     <NotAuthorized {...notAuthProps} />
