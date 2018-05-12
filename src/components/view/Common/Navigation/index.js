@@ -10,8 +10,7 @@ import './styles.css';
 const buildIconMenu = (permissions, actions) => {  
     const { logout } = actions;
     if (permissions.basic) {
-        return (
-            <IconMenu
+        return (<IconMenu
                 iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
                 anchorOrigin={{horizontal: 'left', vertical: 'top'}}
                 targetOrigin={{horizontal: 'left', vertical: 'top'}}
@@ -24,12 +23,10 @@ const buildIconMenu = (permissions, actions) => {
                     containerElement={<Link to="/products" />}
                     primaryText="Products"
                 />
-                {permissions.admin || permissions.seller ? ( 
                 <MenuItem
                     containerElement={<Link to="/admin" />}
                     primaryText="Admin"
-                />) : 
-                ''}
+                />
                 <MenuItem onTouchTap={logout} primaryText="Logout" />
             </IconMenu>
         );
@@ -37,17 +34,17 @@ const buildIconMenu = (permissions, actions) => {
 };
 
 const Navigation = (props) => {
-    const { userPermissions, logout, openLoginModal } = props;
+    const { userPermissions, logout, openModal } = props;
     const titleLink = (<Link className="navigation__title-link" to="/">Well&#8226;Worth</Link>);
-    const iconMenu = buildIconMenu(userPermissions, { logout, openLoginModal });
+    const iconMenu = buildIconMenu(userPermissions, { logout, openModal });
     return (
         <div>
-            {<AppBar
+            <AppBar
                 title={titleLink}
-                showMenuIconButton={true}
+                showMenuIconButton={false}
                 iconElementRight={iconMenu}
             >
-            </AppBar>}
+            </AppBar>
         </div>
     );
 };
