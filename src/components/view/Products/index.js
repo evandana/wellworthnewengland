@@ -6,11 +6,11 @@ import NotAuthorized from 'components/view/NotAuthorized';
 
 const Products = (props) => {
     
-    const { user, location, userPermissions, products, toggleExpandRow, placeOrder, updateQuantity, clearOrderResponses, clearProductQuantities, asyncResponses } = props;
+    const { user, location, userPermissions, products, toggleShowDescription, placeOrder, updateQuantity, clearOrderResponses, clearProductQuantities, asyncResponses } = props;
 
     const cartProps = {
         products,
-        toggleExpandRow,
+        toggleShowDescription,
         updateQuantity,
         rowIndexExpanded: 0,
         placeOrder,
