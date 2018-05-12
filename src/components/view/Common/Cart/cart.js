@@ -53,12 +53,6 @@ class Cart extends Component {
         }
     
         const optionsStyles = {
-            key: {
-                paddingLeft: '0',
-                color: '#aaa',
-                paddingRight: '0.5em',
-                width: '6em',
-            },
             size: {
                 paddingLeft: '0',
                 textAlign: 'right',
@@ -126,6 +120,7 @@ class Cart extends Component {
                 <Table selectable={false} multiSelectable={false} onCellClick={toggleShowDescription} style={{tableLayout: 'auto' }} fixedHeader={false}>
                     <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false} >
                         <TableRow>
+                            <TableHeaderColumn className="cart-item" style={{textAlign: 'center'}}></TableHeaderColumn>
                             <TableHeaderColumn className="cart-name" style={{textAlign: 'center'}}></TableHeaderColumn>
                             <TableHeaderColumn className="cart-item" style={{textAlign: 'center'}}>Total: ${totalCost/100}</TableHeaderColumn>
                             <TableHeaderColumn className="cart-name" style={{textAlign: 'center'}}>
@@ -133,6 +128,7 @@ class Cart extends Component {
                             </TableHeaderColumn>
                         </TableRow>
                         <TableRow>
+                            <TableHeaderColumn className="cart-item" >Item #</TableHeaderColumn>
                             <TableHeaderColumn className="cart-name" >Name</TableHeaderColumn>
                             <TableHeaderColumn className="cart-options" >Options</TableHeaderColumn>
                             <TableHeaderColumn className="cart-description" >Description</TableHeaderColumn>
@@ -141,13 +137,13 @@ class Cart extends Component {
                     </TableHeader>
                     <TableBody displayRowCheckbox={false}>
                         {products.length && products.map((product, index) => {
-                        return <TableRow key={product.options[0].key}>
-                            <TableRowColumn className="cart-name" style={product.expanded ? {whiteSpace: 'normal'} : {}}>{product.title}</TableRowColumn>
-                            <TableRowColumn className="cart-options" style={product.expanded ? {whiteSpace: 'normal'} : {width: '24em'}}>
+                        return <TableRow key={product.item}>
+                            <TableRowColumn className="cart-item" style={product.expanded ? {whiteSpace: 'normal'} : {}}>{product.item}</TableRowColumn>
+                            <TableRowColumn className="cart-name" style={product.expanded ? {whiteSpace: 'normal'} : {}}>{product.name}</TableRowColumn>
+                            <TableRowColumn className="cart-options" style={product.expanded ? {whiteSpace: 'normal'} : {}}>
                                 <Table selectable={false}><TableBody displayRowCheckbox={false} style={optionsStyles.details} >
                                 {product.options && product.options.length && product.options.map((option, index) => {
-                                    return <TableRow key={product.item + '__option_' + index} >
-                                        <TableRowColumn style={optionsStyles.key} >{option.key}</TableRowColumn>
+                                    return <TableRow key={product.item + '__option_' + index} style={{width: '12em'}} >
                                         <TableRowColumn style={optionsStyles.size} >{option.size}</TableRowColumn>
                                         <TableRowColumn style={optionsStyles.price} >${option.price/100}</TableRowColumn>
                                         <TableRowColumn style={optionsStyles.quantity} >
