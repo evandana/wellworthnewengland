@@ -4,7 +4,7 @@ import {
     GET_PRODUCTS,
 } from 'constants.js';
 
-import { updateProducts as updateProductsAction } from 'actions';
+import { updateProducts as updateProductsAction  } from 'actions';
 
 function* getProducts() {
     window._FIREBASE_DB_.ref('/products/')

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { logoutUserRequest, openLoginModal } from 'actions';
-import Navigation from 'components/view/Common/Navigation';
+import { logoutUserRequest, openModal } from '../../../../actions';
+import Navigation from '../../../view/Common/Navigation';
 
 const mapStateToProps = (state) => {
 
@@ -13,8 +13,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         logout: () => {dispatch(logoutUserRequest())},
-        openLoginModal: (data) => {
-            dispatch(openLoginModal());
+        openModal: (data) => {
+            dispatch(openModal());
         }
     }
 
