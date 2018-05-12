@@ -27,20 +27,18 @@ var mailTransport = nodemailer.createTransport(`smtps://${functions.config().ema
 
 exports.ordercreated = functions.database.ref('/orders/{orderId}')
   .onCreate(event => {
-    
-    console.log('raw event data received', event._data)
-
     // Grab the current value of what was written to the Realtime Database.
-    const newOrder = event._data;
+    const newOrder = event.data.val();
     var emailRecipients = [`${functions.config().email.account}@gmail.com`, newOrder.customerInfo.email];
 
     console.log('received', JSON.stringify(newOrder));
     console.log('email recipients: ', emailRecipients);
-    // console.log('email disabled for now');
+    console.log('email disabled for now');
 
+    // TODO: enable once ready
     sendEmail([emailRecipients, newOrder.customerInfo.email], createEmailHtml(newOrder));
 
-    return newOrder;
+    return;
   }
 );
 
@@ -54,8 +52,7 @@ function createEmailHtml(order) {
   // emailStr += 'TOTAL: $' + order.total/100 + '<br/>';
   emailStr += 'ITEMS: ' + '<br/>';
 
-  Object.keys(order.items).forEach(key => {
-    const item = order.items[key]
+  order.items.forEach(item => {
     emailStr += item.quantity + ' x ' + item.name + ' ( ' + item.optionSize + ' @ $ ' + item.optionPrice/100 + ' ) ' + '<br/>';
   });
 
@@ -78,10 +75,13 @@ function sendEmail(users, emailHtml) {
       console.log('sending mail');
       mailTransport.sendMail(mailOptions).then(function () {
         console.log('Order email sent to: ' + email);
-        return true;
+        // Save the date at which we sent the weekly email.
+        // [START basic_write]
+        // return firebase.database().child('/users/' + uid + '/lastSentWeeklyTimestamp')
+        //     .set(firebase.database.ServerValue.TIMESTAMP);
+        // [END basic_write]
       }).catch(function (error) {
-        console.log('Failed to send order email:', error);
-        return false;
+        console.log('Failed to send weekly top posts email:', error);
       });
     }
   });
