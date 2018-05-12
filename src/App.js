@@ -20,7 +20,7 @@ import Authorized from './components/view/Authorized';
 import Home from './components/controller/Home';
 import Navigation from './components/controller/Common/Navigation';
 import AppModal from './components/controller/Common/Modal';
-import { getUser, getProducts } from './actions';
+import { getUser } from './actions';
 import './App.css';
 
 // Needed for onTouchTap
@@ -43,10 +43,7 @@ class App extends Component {
                         uid: user.uid,
                         displayName: user.displayName,
                     };
-
                     window._UI_STORE_.dispatch(getUser(user.uid, userData));
-
-                    window._UI_STORE_.dispatch(getProducts());
                 }
             }
         );

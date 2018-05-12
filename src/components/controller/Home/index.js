@@ -1,16 +1,15 @@
 import { connect } from 'react-redux';
-import { openModal, toggleShowDescription, updateQuantity } from 'actions';
-import Home from 'components/view/Home';
+import { openModal } from '../../../actions';
+import Home from '../../view/Home';
 
 const mapStateToProps = (state) => {
 
     return {
-        products: state.products,
         userRole: state.user.role,
     };
 };
 
-const mapDispatchToProps = { openModal, toggleShowDescription, updateQuantity };
+const mapDispatchToProps = { openModal };
 
 const HomeController = connect(
     mapStateToProps, mapDispatchToProps
