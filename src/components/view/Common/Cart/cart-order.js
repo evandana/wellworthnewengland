@@ -37,10 +37,9 @@ class CartOrder extends Component {
                 product.options.forEach( option => {
                     if (option.quantity > 0) {
                         productsOrdered.push({
-                            title: product.title,
                             item: product.item,
-                            key: product.item || Math.round(Math.random()*1000),
-                            name: product.title,
+                            key: product.key,
+                            name: product.name,
                             optionKey: option.key,
                             optionPrice: option.price,
                             optionSize: option.size,
@@ -114,7 +113,7 @@ class CartOrder extends Component {
                         <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false} >
                             <TableRow>
                                 <TableHeaderColumn className="cart-item" style={{textAlign: 'center'}}>Date</TableHeaderColumn>
-                                <TableHeaderColumn className="cart-name" colSpan={2} style={{textAlign: 'center'}}>Size</TableHeaderColumn>
+                                <TableHeaderColumn className="cart-name" colSpan={2} style={{textAlign: 'center'}}>Name</TableHeaderColumn>
                                 <TableHeaderColumn className="cart-name" colSpan={2} style={{textAlign: 'center'}}>Email</TableHeaderColumn>
                             </TableRow>
                             <TableRow>
@@ -123,7 +122,7 @@ class CartOrder extends Component {
                             </TableRow>
                             <TableRow>
                                 <TableHeaderColumn className="cart-item" >Item</TableHeaderColumn>
-                                <TableHeaderColumn className="cart-name" >Size</TableHeaderColumn>
+                                <TableHeaderColumn className="cart-name" >Name</TableHeaderColumn>
                                 <TableHeaderColumn className="cart-option-price" >Option Price</TableHeaderColumn>
                                 <TableHeaderColumn className="cart-quantity" >Quantity</TableHeaderColumn>
                                 <TableHeaderColumn className="cart-quantity" >Cost Per Line</TableHeaderColumn>
@@ -131,12 +130,12 @@ class CartOrder extends Component {
                         </TableHeader>
                         <TableBody displayRowCheckbox={false}>
                             {productsOrdered.length && productsOrdered.map((product, index) => {
-                            return <TableRow key={product.optionKey}>
-                                <TableRowColumn className="cart-item">{product.optionKey}</TableRowColumn>
-                                <TableRowColumn className="cart-name" style={{whiteSpace: 'normal'}}>{product.title} ({product.optionSize ? product.optionSize : <span style={{color:'#ccc'}}>one size</span>})</TableRowColumn>
-                                <TableRowColumn className="cart-option-price" style={{whiteSpace: 'normal'}}><span style={{color:'#ccc'}}>@</span> ${product.optionPrice/100}</TableRowColumn>
-                                <TableRowColumn className="cart-quantity" style={{whiteSpace: 'normal'}}><span style={{color:'#ccc'}}>x</span>  {product.quantity}</TableRowColumn>
-                                <TableRowColumn className="cart-option-price" style={{whiteSpace: 'normal'}}><span style={{color:'#ccc'}}>=</span>  ${product.optionPrice * product.quantity/100}</TableRowColumn>
+                            return <TableRow key={product.item + ':' + index}>
+                                <TableRowColumn className="cart-item">{product.item}</TableRowColumn>
+                                <TableRowColumn className="cart-name" style={{whiteSpace: 'normal'}}>{product.name} ({product.optionSize})</TableRowColumn>
+                                <TableRowColumn className="cart-option-price" style={{whiteSpace: 'normal'}}>@ ${product.optionPrice/100}</TableRowColumn>
+                                <TableRowColumn className="cart-quantity" style={{whiteSpace: 'normal'}}>x {product.quantity}</TableRowColumn>
+                                <TableRowColumn className="cart-option-price" style={{whiteSpace: 'normal'}}>= ${product.optionPrice * product.quantity/100}</TableRowColumn>
                             </TableRow>
                             })}
                         </TableBody>
