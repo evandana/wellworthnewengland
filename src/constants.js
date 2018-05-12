@@ -18,13 +18,3 @@ export const ANONYMOUS = 'ANONYMOUS';
 export const PENDING = 'PENDING';
 export const CUSTOMER = 'CUSTOMER';
 export const ADMIN = 'ADMIN';
-
-/** PRODUCTS */
-export const GET_PRODUCTS = 'GET_PRODUCTS';
-export const UPDATE_PRODUCTS = 'UPDATE_PRODUCTS';
-
-/** ROW EXPANSION **/
-export const TOGGLE_SHOW_DESCRIPTION = 'TOGGLE_SHOW_DESCRIPTION';
-
-/** PRICE UPDATES **/
-export const UPDATE_QUANTITY = 'UPDATE_QUANTITY';
