@@ -13,20 +13,7 @@ function* getProducts() {
             // get vals
             const products = snapshot.val()
                 // filter out any null products
-                .filter(p => !!p)
-                // add custom sorting
-                .sort((a, b) => {
-                    let aOrder = a.defaultOrder === false ? 999 : a.defaultOrder;
-                    let bOrder = b.defaultOrder === false ? 999 : b.defaultOrder;
-
-                    if (aOrder < bOrder) {
-                        return -1;
-                    } else if ( aOrder > bOrder ) {
-                        return 1;
-                    } else {
-                        return 0;
-                    }
-                });
+                .filter(p => !!p);
 
             window._UI_STORE_.dispatch(updateProductsAction(products));
         });
