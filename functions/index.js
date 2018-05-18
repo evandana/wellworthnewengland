@@ -32,13 +32,13 @@ exports.ordercreated = functions.database.ref('/orders/{orderId}')
 
     // Grab the current value of what was written to the Realtime Database.
     const newOrder = event._data;
-    var emailRecipients = [`${functions.config().email.account}@gmail.com`, newOrder.customerInfo.email];
+    var emailRecipients = [`${functions.config().email.account}@gmail.com`];
 
     console.log('received', JSON.stringify(newOrder));
     console.log('email recipients: ', emailRecipients);
     // console.log('email disabled for now');
 
-    sendEmail([emailRecipients, newOrder.customerInfo.email], createEmailHtml(newOrder));
+    sendEmail([emailRecipients], createEmailHtml(newOrder));
 
     return newOrder;
   }
