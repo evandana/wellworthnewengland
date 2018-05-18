@@ -4,7 +4,7 @@ import AppBar from 'material-ui/AppBar';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import MenuIcon from 'material-ui/svg-icons/navigation/menu';
 import './styles.css';
 
 const buildIconMenu = (permissions, actions) => {  
@@ -12,7 +12,7 @@ const buildIconMenu = (permissions, actions) => {
     if (permissions.basic) {
         return (
             <IconMenu
-                iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
+                iconButtonElement={<IconButton><MenuIcon color='#fff'/></IconButton>}
                 anchorOrigin={{horizontal: 'left', vertical: 'top'}}
                 targetOrigin={{horizontal: 'left', vertical: 'top'}}
             >
@@ -45,7 +45,7 @@ const Navigation = (props) => {
             {<AppBar
                 title={titleLink}
                 showMenuIconButton={true}
-                iconElementRight={iconMenu}
+                iconElementLeft={iconMenu}
             >
             </AppBar>}
         </div>

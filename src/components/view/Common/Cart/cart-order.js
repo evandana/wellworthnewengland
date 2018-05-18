@@ -86,13 +86,11 @@ class CartOrder extends Component {
                         <FlatButton
                             label="Close"
                             secondary={true}
-                            keyboardFocused={true}
                             onClick={onClose}
                         />,
                         <RaisedButton
                             label="Submit"
                             primary={true}
-                            keyboardFocused={true}
                             onClick={() => {
                                 placeOrder(
                                     productsOrdered,
@@ -117,7 +115,7 @@ class CartOrder extends Component {
                     <Table selectable={false} multiSelectable={false} style={{tableLayout: 'auto' }} fixedHeader={false}>
                         <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false} >
                             <TableRow>
-                                <TableHeaderColumn colSpan={2} className="cart-item" style={{textAlign: 'center'}}>
+                                <TableHeaderColumn colSpan={1} className="cart-item" style={{textAlign: 'center'}}>
                                     Order will be placed: 
                                     <span style={{color:'#000'}}>
                                         <TimeFormatter
@@ -125,12 +123,7 @@ class CartOrder extends Component {
                                             />
                                     </span>
                                 </TableHeaderColumn>
-                                <TableHeaderColumn className="cart-name" style={{textAlign: 'center'}}>
-                                    Email: <span style={{color:'#000'}}>{user.email}</span>
-                                </TableHeaderColumn>
-                            </TableRow>
-                            <TableRow>
-                                <TableHeaderColumn colSpan={2} className="cart-item" style={{textAlign: 'center'}}>
+                                <TableHeaderColumn colSpan={1} className="cart-item" style={{textAlign: 'center'}}>
                                     Branch Name: <span style={{color:'#000'}}>{orderMetaData.branchName}</span>
                                 </TableHeaderColumn>
                                 <TableHeaderColumn className="cart-item" style={{textAlign: 'center'}}>

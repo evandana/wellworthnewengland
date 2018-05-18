@@ -1,9 +1,3 @@
-.pendingUser__auth-status {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
 .pendingUser__auth-logout {
   margin-left: 25px;
   cursor: pointer;

@@ -14,7 +14,8 @@ const mapDispatchActions = {
     logoutUserRequest,
     updateUserPermissions: (user) => updateUser({permissions: {
         basic: true,
-        products: true
+        products: true,
+        ...user,
     }}),
 };
 

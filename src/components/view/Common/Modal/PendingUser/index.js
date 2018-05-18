@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import InputController from 'components/controller/Common/Forms/InputValidated';
-import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import './styles.css';
 
 class PendingUser extends Component {
@@ -28,9 +28,6 @@ class PendingUser extends Component {
         const superSecretKey = "enterprise07";
         const { updateUserPermissions } = this.props;
         if (this.inputValue.toLowerCase() === superSecretKey) {
-            // this.setState({
-            //     validInput: true,
-            // });
             updateUserPermissions();
         } else {
             this.setState({
@@ -65,10 +62,12 @@ class PendingUser extends Component {
         };
 
         return (
-            <div>
-                <div className="pendingUser__auth-status">
-                    <span>Logged in as: {userName}</span>
-                    <FlatButton {...logoutButtonProps} />
+            <div >
+                <div style={{display:'flex', justifyContent:'space-between', borderBottom:'1px solid #ddd', paddingBottom:'0.5em' }} >
+                    <span>Logged in as: <span style={{fontStyle: 'oblique'}}>{userName || 'Anonymous'}</span></span>
+                    <FlatButton
+                        {...logoutButtonProps} 
+                        />
                 </div>
                 <div className="pendingUser__key-form">
                     <span>If you have a customer key please enter it below</span>

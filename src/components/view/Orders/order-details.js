@@ -34,7 +34,6 @@ const OrderDetails = (props) => {
                     <FlatButton
                         label="Close"
                         primary={true}
-                        keyboardFocused={true}
                         onClick={() => {
                             toggleOrderDetails( orderKey, false );
                         }}

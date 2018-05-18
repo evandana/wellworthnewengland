@@ -34,30 +34,51 @@ class App extends Component {
         
         /** Firebase Setup **/
         window._FIREBASE_ = firebase.initializeApp(config.firebase);
-        window._FIREBASE_PROVIDER_ = new firebase.auth.GoogleAuthProvider();
+        window._FIREBASE_GOOGLE_AUTH_PROVIDER_ = new firebase.auth.GoogleAuthProvider();
         window._FIREBASE_DB_ = firebase.database();
-        window._FIREBASE_.auth().onAuthStateChanged(
-            (user) => {
-                if(user && user.uid) {
-                    const userData = {
-                        uid: user.uid,
-                        displayName: user.displayName,
-                        permissions: user.permissions,
-                        email: user.email,
-                    };
-                    
-                    window._UI_STORE_.dispatch(getUser(user.uid, userData));
-                    
-                    // TODO: only load this on the products route
-                    window._UI_STORE_.dispatch(getProducts());
-                    
-                    // TODO: only load this on the admin route
-                    window._UI_STORE_.dispatch(getOrders());
-                } else {
-                    window._UI_STORE_.dispatch(setCurrentUser({authInitiated: true}));
+
+        // firebase.auth().signInAnonymously().catch(function(error) {
+        //     // Handle Errors here.
+        //     var errorCode = error.code;
+        //     var errorMessage = error.message;
+
+        //     console.log('anonymous sign in error')
+        //     // ...
+        // });
+
+        window._FIREBASE_.auth().onAuthStateChanged( user => {
+
+            const provider = user && user.providerData && user.providerData[0] && user.providerData[0].providerId ? 
+                    user.providerData[0].providerId :
+                    'anonymous provider';
+
+            if (user && user.uid) {
+                const userData = {
+                    uid: user.uid,
+                    permissions: user.permissions,
+                    provider,
+                };
+                if (user && user.displayName) {
+                    userData.displayName = user.displayName;
                 }
+                if (user && user.email) {
+                    userData.email = user.email;
+                }
+                
+                window._UI_STORE_.dispatch(getUser(user.uid, userData));
+                
+                // TODO: only load this on the products route
+                window._UI_STORE_.dispatch(getProducts());
+                
+                // TODO: only load this on the admin route
+                window._UI_STORE_.dispatch(getOrders());
+            } else {
+                window._UI_STORE_.dispatch(setCurrentUser({
+                    authInitiated: true, 
+                    provider,
+                }));
             }
-        );
+        });
     }
     
 

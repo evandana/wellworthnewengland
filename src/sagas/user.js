@@ -5,8 +5,7 @@ import {
     UPDATE_USER,
 } from 'constants.js';
 
-import { setCurrentUser, updateUser as updateUserAction } from 'actions';
-
+import { setCurrentUser, updateUser as updateUserAction, getProducts, getOrders, } from 'actions';
 
 function* getUser({uid, userData}) {
     window._FIREBASE_DB_.ref('/users/' + uid)
@@ -30,16 +29,36 @@ function* updateUser({userData}) {
     if(!currentUser || !currentUser.uid) {
         cleanUser = {
             uid: userData.uid,
-            displayName: userData.displayName,
             permissions: userData.permissions,
-            email: userData.email,
+            provider: userData.provider,
         };
+        if (userData.displayName) {
+            cleanUser.displayName = userData.displayName;
+        }
+        if (userData.email) {
+            cleanUser.email = userData.email;
+        }
     } else {
         cleanUser = {...currentUser, ...userData};
     }
+
+    if (cleanUser.authInitiated) {
+        delete cleanUser.authInitiated;
+    }
     
     window._FIREBASE_DB_.ref('users/' + cleanUser.uid)
-        .set(cleanUser);
+        .set(cleanUser)
+        .then( user => {
+
+                // Make requests for data, in case it's relevant
+                // Trust DB to only share accessible data
+
+                // TODO: only load this on the products route
+                window._UI_STORE_.dispatch(getProducts());
+                
+                // TODO: only load this on the admin route
+                window._UI_STORE_.dispatch(getOrders());
+        });
     
     yield;
 }

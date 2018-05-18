@@ -7,6 +7,7 @@ import {
     GET_USER,
     UPDATE_USER,
     SET_CURRENT_USER,    
+    SUBMIT_SIGN_IN_CODES,
 
     // MODALS
     OPEN_MODAL,
@@ -81,6 +82,14 @@ export function updateUser(userData) {
 export function openLoginModal() {
     return {
         type: OPEN_MODAL,
+    };
+}
+
+export function submitSignInCodes({branchName, passphrase}) {
+    return {
+        type: SUBMIT_SIGN_IN_CODES,
+        branchName,
+        passphrase,
     };
 }
 
