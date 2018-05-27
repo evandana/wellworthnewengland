@@ -3,7 +3,7 @@
 ## Run App
 
 1. `npm install`
-1. Run any of the scripts in [./package.json]'s `scripts` block. Example: `npm start`
+1. `npm start` or any of the scripts in [./package.json]'s `scripts` block
 
 ## UI Client
 
@@ -13,6 +13,12 @@
 ## Cloud Functions (Email)
 
 [Cloud Functions Instructions](function/README.md)
+
+
+## Deploy
+
+1. `npm run build`
+1. `firebase deploy`
 
 
 ## License
