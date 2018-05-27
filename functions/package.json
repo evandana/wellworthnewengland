@@ -4,7 +4,7 @@
   "description": "Cloud FUnctions for Wellworth New England",
   "main": "index.js",
   "author": "Evan Dana and David Thomas",
-  "license": "Apache License Version 2.0",
+  "license": "GNU Affero General Public License v3.0",
   "dependencies": {
     "child-process-promise": "^2.2.0",
     "cors": "^2.8.1",
